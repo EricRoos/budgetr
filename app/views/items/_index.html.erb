@@ -1,9 +1,10 @@
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th>Name</th>
       <th>Quantity</th>
       <th>Purchase price cents</th>
+      <th colspan=2></th>
     </tr>
   </thead>
 
@@ -13,8 +14,8 @@
         <td><%= item.name %></td>
         <td><%= item.quantity %></td>
         <td><%= item.purchase_price_cents %></td>
-        <td><%= link_to 'Edit', edit_project_item_group_item_path(item.item_group.project, item.item_group, item) %></td>
-        <td><%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_project_item_group_item_path(item.item_group.project, item.item_group, item), class: 'btn' %></td>
+        <td><%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>

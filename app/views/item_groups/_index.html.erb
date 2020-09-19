@@ -1,28 +1,24 @@
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Budget</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div id="accordion">
 
-  <tbody>
-    <% item_groups.each do |item_group| %>
-      <tr>
-        <td><%= item_group.name %></td>
-        <td><%= item_group.budget %></td>
-        <td><%= link_to 'Edit', edit_project_item_group_path(@project, item_group) %></td>
-        <td><%= link_to 'Destroy', project_item_group_path(@project, item_group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan='3'>
-          Items
+  <% item_groups.each do |item_group| %>
+    <% card_label = "headingItemGroup#{item_group.id}" %>
+    <% collapse_label = "collapseItemGroup#{item_group.id}" %>
+    <% shown = params[:shownItemGroup]&.to_i == item_group.id%>
+    <div class="card">
+      <div class="card-header" id="<%= card_label %>">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#<%= collapse_label %>" aria-expanded="false" aria-controls="<%= collapse_label %>">
+            <%= item_group.name %>
+          </button>
+        </h5>
+      </div>
+
+      <div id="<%= collapse_label %>" class="collapse <%= shown ? "show" : nil %>" aria-labelledby="<%= card_label %>" data-parent="#accordion">
+        <div class="card-body">
           <%= render partial: 'items/index', locals: { items: item_group.items } %>
           <%= link_to 'Add Item', new_project_item_group_item_path(@project, item_group) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
