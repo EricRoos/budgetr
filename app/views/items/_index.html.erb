@@ -1,0 +1,21 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Purchase price cents</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.purchase_price_cents %></td>
+        <td><%= link_to 'Edit', edit_project_item_group_item_path(item.item_group.project, item.item_group, item) %></td>
+        <td><%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Item Groups</h1>
+
+<%= render partial: :index, locals: { item_groups: @item_groups } %>
+
+<br>
+
+<%= link_to 'New Item Group', new_item_group_path %>

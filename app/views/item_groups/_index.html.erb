@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Budget</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% item_groups.each do |item_group| %>
+      <tr>
+        <td><%= item_group.name %></td>
+        <td><%= item_group.budget %></td>
+        <td><%= link_to 'Edit', edit_project_item_group_path(@project, item_group) %></td>
+        <td><%= link_to 'Destroy', project_item_group_path(@project, item_group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan='3'>
+          Items
+          <%= render partial: 'items/index', locals: { items: item_group.items } %>
+          <%= link_to 'Add Item', new_project_item_group_item_path(@project, item_group) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

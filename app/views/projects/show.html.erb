@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<section>
+  <%= link_to 'Update', edit_project_path(@project) %>
+  <h1>
+    <%= @project.name %>
+  </h1>
+
+  <p>
+    <strong>Budget:</strong>
+    <%= @project.budget %>
+  </p>
+
+  <p>
+    <strong>Budget Remaining:</strong>
+    <%= @project.budget_remaining %>
+  </p>
+</section>
+<hr/>
+<section>
+  <%= render partial: 'item_groups/index', locals: { item_groups: @project.item_groups } %>
+  <%= link_to 'Add Item Group', new_project_item_group_path(@project) %>
+</section>
+
+<%= link_to 'Back', projects_path %>
