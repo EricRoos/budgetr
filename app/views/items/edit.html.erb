@@ -2,4 +2,4 @@
 
 <%= render 'form', item: @item %>
 
-<%= link_to 'Back', @project %>
+<%= link_to 'Back', project_path(@project, shownItemGroup: @item.item_group.id) %>

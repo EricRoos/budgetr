@@ -27,3 +27,506 @@
 <br>
 
 <%= link_to 'New Project', new_project_path %>
+
+<div class="content">
+  <!-- Start Content-->
+  <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box">
+                  <div class="page-title-right">
+                      <form class="form-inline">
+                          <div class="form-group">
+                              <div class="input-group">
+                                  <input type="text" class="form-control form-control-light" id="dash-daterange">
+                                  <div class="input-group-append">
+                                      <span class="input-group-text bg-primary border-primary text-white">
+                                          <i class="mdi mdi-calendar-range font-13"></i>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                          <a href="javascript: void(0);" class="btn btn-primary ml-2">
+                              <i class="mdi mdi-autorenew"></i>
+                          </a>
+                          <a href="javascript: void(0);" class="btn btn-primary ml-1">
+                              <i class="mdi mdi-filter-variant"></i>
+                          </a>
+                      </form>
+                  </div>
+                  <h4 class="page-title">Dashboard</h4>
+              </div>
+          </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+          <div class="col-xl-5 col-lg-6">
+
+              <div class="row">
+                  <div class="col-lg-6">
+                      <div class="card widget-flat">
+                          <div class="card-body">
+                              <div class="float-right">
+                                  <i class="mdi mdi-account-multiple widget-icon"></i>
+                              </div>
+                              <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">Customers</h5>
+                              <h3 class="mt-3 mb-3">36,254</h3>
+                              <p class="mb-0 text-muted">
+                                  <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
+                                  <span class="text-nowrap">Since last month</span>
+                              </p>
+                          </div> <!-- end card-body-->
+                      </div> <!-- end card-->
+                  </div> <!-- end col-->
+
+                  <div class="col-lg-6">
+                      <div class="card widget-flat">
+                          <div class="card-body">
+                              <div class="float-right">
+                                  <i class="mdi mdi-cart-plus widget-icon"></i>
+                              </div>
+                              <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Orders</h5>
+                              <h3 class="mt-3 mb-3">5,543</h3>
+                              <p class="mb-0 text-muted">
+                                  <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                  <span class="text-nowrap">Since last month</span>
+                              </p>
+                          </div> <!-- end card-body-->
+                      </div> <!-- end card-->
+                  </div> <!-- end col-->
+              </div> <!-- end row -->
+
+              <div class="row">
+                  <div class="col-lg-6">
+                      <div class="card widget-flat">
+                          <div class="card-body">
+                              <div class="float-right">
+                                  <i class="mdi mdi-currency-usd widget-icon"></i>
+                              </div>
+                              <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">Revenue</h5>
+                              <h3 class="mt-3 mb-3">$6,254</h3>
+                              <p class="mb-0 text-muted">
+                                  <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                  <span class="text-nowrap">Since last month</span>
+                              </p>
+                          </div> <!-- end card-body-->
+                      </div> <!-- end card-->
+                  </div> <!-- end col-->
+
+                  <div class="col-lg-6">
+                      <div class="card widget-flat">
+                          <div class="card-body">
+                              <div class="float-right">
+                                  <i class="mdi mdi-pulse widget-icon"></i>
+                              </div>
+                              <h5 class="text-muted font-weight-normal mt-0" title="Growth">Growth</h5>
+                              <h3 class="mt-3 mb-3">+ 30.56%</h3>
+                              <p class="mb-0 text-muted">
+                                  <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 4.87%</span>
+                                  <span class="text-nowrap">Since last month</span>
+                              </p>
+                          </div> <!-- end card-body-->
+                      </div> <!-- end card-->
+                  </div> <!-- end col-->
+              </div> <!-- end row -->
+
+          </div> <!-- end col -->
+      </div>
+      <!-- end row -->
+
+      <div class="row">
+          <div class="col-lg-8">
+              <div class="card">
+                  <div class="card-body" style="position: relative;">
+                      <div class="dropdown float-right">
+                          <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                              <i class="mdi mdi-dots-vertical"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                          </div>
+                      </div>
+                      <h4 class="header-title mb-3">Revenue</h4>
+
+                      <div class="chart-content-bg">
+                          <div class="row text-center">
+                              <div class="col-md-6">
+                                  <p class="text-muted mb-0 mt-3">Current Week</p>
+                                  <h2 class="font-weight-normal mb-3">
+                                      <small class="mdi mdi-checkbox-blank-circle text-primary align-middle mr-1"></small>
+                                      <span>$58,254</span>
+                                  </h2>
+                              </div>
+                              <div class="col-md-6">
+                                  <p class="text-muted mb-0 mt-3">Previous Week</p>
+                                  <h2 class="font-weight-normal mb-3">
+                                      <small class="mdi mdi-checkbox-blank-circle text-success align-middle mr-1"></small>
+                                      <span>$69,524</span>
+                                  </h2>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="dash-item-overlay d-none d-md-block">
+                          <h5>Today's Earning: $2,562.30</h5>
+                          <p class="text-muted font-13 mb-3 mt-2">Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+                              Etiam rhoncus...</p>
+                          <a href="javascript: void(0);" class="btn btn-outline-primary">View Statements
+                              <i class="mdi mdi-arrow-right ml-2"></i>
+                          </a>
+                      </div>
+
+                  <div class="resize-triggers"><div class="expand-trigger"><div style="width: 1025px; height: 589px;"></div></div><div class="contract-trigger"></div></div></div> <!-- end card-body-->
+              </div> <!-- end card-->
+          </div> <!-- end col-->
+
+          <div class="col-lg-4">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="dropdown float-right">
+                          <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                              <i class="mdi mdi-dots-vertical"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                          </div>
+                      </div>
+                      <h4 class="header-title">Revenue By Location</h4>
+                      <div class="mb-4 mt-4">
+                      </div>
+
+                      <h5 class="mb-1 mt-0 font-weight-normal">New York</h5>
+                      <div class="progress-w-percent">
+                          <span class="progress-value font-weight-bold">72k </span>
+                          <div class="progress progress-sm">
+                              <div class="progress-bar" role="progressbar" style="width: 72%;" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+
+                      <h5 class="mb-1 mt-0 font-weight-normal">San Francisco</h5>
+                      <div class="progress-w-percent">
+                          <span class="progress-value font-weight-bold">39k </span>
+                          <div class="progress progress-sm">
+                              <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+
+                      <h5 class="mb-1 mt-0 font-weight-normal">Sydney</h5>
+                      <div class="progress-w-percent">
+                          <span class="progress-value font-weight-bold">25k </span>
+                          <div class="progress progress-sm">
+                              <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+
+                      <h5 class="mb-1 mt-0 font-weight-normal">Singapore</h5>
+                      <div class="progress-w-percent mb-0">
+                          <span class="progress-value font-weight-bold">61k </span>
+                          <div class="progress progress-sm">
+                              <div class="progress-bar" role="progressbar" style="width: 61%;" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+                  </div> <!-- end card-body-->
+              </div> <!-- end card-->
+          </div> <!-- end col-->
+      </div>
+      <!-- end row -->
+
+
+      <div class="row">
+          <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+              <div class="card">
+                  <div class="card-body">
+                      <a href="" class="btn btn-sm btn-link float-right mb-3">Export
+                          <i class="mdi mdi-download ml-1"></i>
+                      </a>
+                      <h4 class="header-title mt-2">Top Selling Products</h4>
+
+                      <div class="table-responsive">
+                          <table class="table table-centered table-nowrap table-hover mb-0">
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">ASOS Ridley High Waist</h5>
+                                          <span class="text-muted font-13">07 April 2018</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$79.49</h5>
+                                          <span class="text-muted font-13">Price</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">82</h5>
+                                          <span class="text-muted font-13">Quantity</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$6,518.18</h5>
+                                          <span class="text-muted font-13">Amount</span>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">Marco Lightweight Shirt</h5>
+                                          <span class="text-muted font-13">25 March 2018</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$128.50</h5>
+                                          <span class="text-muted font-13">Price</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">37</h5>
+                                          <span class="text-muted font-13">Quantity</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$4,754.50</h5>
+                                          <span class="text-muted font-13">Amount</span>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">Half Sleeve Shirt</h5>
+                                          <span class="text-muted font-13">17 March 2018</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$39.99</h5>
+                                          <span class="text-muted font-13">Price</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">64</h5>
+                                          <span class="text-muted font-13">Quantity</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$2,559.36</h5>
+                                          <span class="text-muted font-13">Amount</span>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">Lightweight Jacket</h5>
+                                          <span class="text-muted font-13">12 March 2018</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$20.00</h5>
+                                          <span class="text-muted font-13">Price</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">184</h5>
+                                          <span class="text-muted font-13">Quantity</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$3,680.00</h5>
+                                          <span class="text-muted font-13">Amount</span>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">Marco Shoes</h5>
+                                          <span class="text-muted font-13">05 March 2018</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$28.49</h5>
+                                          <span class="text-muted font-13">Price</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">69</h5>
+                                          <span class="text-muted font-13">Quantity</span>
+                                      </td>
+                                      <td>
+                                          <h5 class="font-14 my-1 font-weight-normal">$1,965.81</h5>
+                                          <span class="text-muted font-13">Amount</span>
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div> <!-- end table-responsive-->
+                  </div> <!-- end card-body-->
+              </div> <!-- end card-->
+          </div> <!-- end col-->
+
+          <div class="col-xl-3 col-lg-6 order-lg-1">
+              <div class="card">
+                  <div class="card-body" style="position: relative;">
+                      <div class="dropdown float-right">
+                          <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                              <i class="mdi mdi-dots-vertical"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                          </div>
+                      </div>
+                      <h4 class="header-title">Total Sales</h4>
+
+                      <div id="average-sales" class="apex-charts mb-4 mt-4" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00" style="min-height: 215.7px;"><div id="apexchartska6x26i1" class="apexcharts-canvas apexchartska6x26i1 apexcharts-theme-light" style="width: 321px; height: 215.7px;"><svg id="SvgjsSvg1223" width="321" height="215.7" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent none repeat scroll 0% 0%;"><g id="SvgjsG1225" class="apexcharts-inner apexcharts-graphical" transform="translate(54, 0)"><defs id="SvgjsDefs1224"><clipPath id="gridRectMaskka6x26i1"><rect id="SvgjsRect1227" width="219" height="215" x="-3" y="-1" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMaskka6x26i1"><rect id="SvgjsRect1228" width="217" height="217" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><filter id="SvgjsFilter1237" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%" y="-50%"><feFlood id="SvgjsFeFlood1238" flood-color="#000000" flood-opacity="0.45" result="SvgjsFeFlood1238Out" in="SourceGraphic"></feFlood><feComposite id="SvgjsFeComposite1239" in="SvgjsFeFlood1238Out" in2="SourceAlpha" operator="in" result="SvgjsFeComposite1239Out"></feComposite><feOffset id="SvgjsFeOffset1240" dx="1" dy="1" result="SvgjsFeOffset1240Out" in="SvgjsFeComposite1239Out"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1241" stdDeviation="1 " result="SvgjsFeGaussianBlur1241Out" in="SvgjsFeOffset1240Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1242" in="SourceGraphic" in2="SvgjsFeGaussianBlur1241Out" mode="normal" result="SvgjsFeBlend1242Out"></feBlend></filter><filter id="SvgjsFilter1246" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%" y="-50%"><feFlood id="SvgjsFeFlood1247" flood-color="#000000" flood-opacity="0.45" result="SvgjsFeFlood1247Out" in="SourceGraphic"></feFlood><feComposite id="SvgjsFeComposite1248" in="SvgjsFeFlood1247Out" in2="SourceAlpha" operator="in" result="SvgjsFeComposite1248Out"></feComposite><feOffset id="SvgjsFeOffset1249" dx="1" dy="1" result="SvgjsFeOffset1249Out" in="SvgjsFeComposite1248Out"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1250" stdDeviation="1 " result="SvgjsFeGaussianBlur1250Out" in="SvgjsFeOffset1249Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1251" in="SourceGraphic" in2="SvgjsFeGaussianBlur1250Out" mode="normal" result="SvgjsFeBlend1251Out"></feBlend></filter><filter id="SvgjsFilter1255" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%" y="-50%"><feFlood id="SvgjsFeFlood1256" flood-color="#000000" flood-opacity="0.45" result="SvgjsFeFlood1256Out" in="SourceGraphic"></feFlood><feComposite id="SvgjsFeComposite1257" in="SvgjsFeFlood1256Out" in2="SourceAlpha" operator="in" result="SvgjsFeComposite1257Out"></feComposite><feOffset id="SvgjsFeOffset1258" dx="1" dy="1" result="SvgjsFeOffset1258Out" in="SvgjsFeComposite1257Out"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1259" stdDeviation="1 " result="SvgjsFeGaussianBlur1259Out" in="SvgjsFeOffset1258Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1260" in="SourceGraphic" in2="SvgjsFeGaussianBlur1259Out" mode="normal" result="SvgjsFeBlend1260Out"></feBlend></filter><filter id="SvgjsFilter1264" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%" y="-50%"><feFlood id="SvgjsFeFlood1265" flood-color="#000000" flood-opacity="0.45" result="SvgjsFeFlood1265Out" in="SourceGraphic"></feFlood><feComposite id="SvgjsFeComposite1266" in="SvgjsFeFlood1265Out" in2="SourceAlpha" operator="in" result="SvgjsFeComposite1266Out"></feComposite><feOffset id="SvgjsFeOffset1267" dx="1" dy="1" result="SvgjsFeOffset1267Out" in="SvgjsFeComposite1266Out"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1268" stdDeviation="1 " result="SvgjsFeGaussianBlur1268Out" in="SvgjsFeOffset1267Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1269" in="SourceGraphic" in2="SvgjsFeGaussianBlur1268Out" mode="normal" result="SvgjsFeBlend1269Out"></feBlend></filter></defs><g id="SvgjsG1230" class="apexcharts-pie"><g id="SvgjsG1231" transform="translate(0, 0) scale(1)"><circle id="SvgjsCircle1232" r="63.63658536585366" cx="106.5" cy="106.5" fill="transparent"></circle><g id="SvgjsG1233" class="apexcharts-slices"><g id="SvgjsG1234" class="apexcharts-series apexcharts-pie-series" seriesName="Direct" rel="1" data:realIndex="0"><path id="SvgjsPath1235" d="M 106.5 8.597560975609753 A 97.90243902439025 97.90243902439025 0 0 1 202.63882743292783 124.99901150727173 L 168.99023783140308 118.52435747972663 A 63.63658536585366 63.63658536585366 0 0 0 106.5 42.86341463414634 L 106.5 8.597560975609753 z" fill="rgba(114,124,245,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-0" index="0" j="0" data:angle="100.89171974522293" data:startAngle="0" data:strokeWidth="2" data:value="44" data:pathOrig="M 106.5 8.597560975609753 A 97.90243902439025 97.90243902439025 0 0 1 202.63882743292783 124.99901150727173 L 168.99023783140308 118.52435747972663 A 63.63658536585366 63.63658536585366 0 0 0 106.5 42.86341463414634 L 106.5 8.597560975609753 z" stroke="transparent"></path></g><g id="SvgjsG1243" class="apexcharts-series apexcharts-pie-series" seriesName="Affilliate" rel="2" data:realIndex="1"><path id="SvgjsPath1244" d="M 202.63882743292783 124.99901150727173 A 97.90243902439025 97.90243902439025 0 0 1 34.8912666900564 173.26134271170574 L 59.95432334853666 149.8948727626087 A 63.63658536585366 63.63658536585366 0 0 0 168.99023783140308 118.52435747972663 L 202.63882743292783 124.99901150727173 z" fill="rgba(10,207,151,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-1" index="0" j="1" data:angle="126.11464968152865" data:startAngle="100.89171974522293" data:strokeWidth="2" data:value="55" data:pathOrig="M 202.63882743292783 124.99901150727173 A 97.90243902439025 97.90243902439025 0 0 1 34.8912666900564 173.26134271170574 L 59.95432334853666 149.8948727626087 A 63.63658536585366 63.63658536585366 0 0 0 168.99023783140308 118.52435747972663 L 202.63882743292783 124.99901150727173 z" stroke="transparent"></path></g><g id="SvgjsG1252" class="apexcharts-series apexcharts-pie-series" seriesName="Sponsored" rel="3" data:realIndex="2"><path id="SvgjsPath1253" d="M 34.8912666900564 173.26134271170574 A 97.90243902439025 97.90243902439025 0 0 1 44.91337657308285 30.394971376422504 L 66.46869477250385 57.03173139467462 A 63.63658536585366 63.63658536585366 0 0 0 59.95432334853666 149.8948727626087 L 34.8912666900564 173.26134271170574 z" fill="rgba(250,92,124,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-2" index="0" j="2" data:angle="94.01273885350315" data:startAngle="227.00636942675158" data:strokeWidth="2" data:value="41" data:pathOrig="M 34.8912666900564 173.26134271170574 A 97.90243902439025 97.90243902439025 0 0 1 44.91337657308285 30.394971376422504 L 66.46869477250385 57.03173139467462 A 63.63658536585366 63.63658536585366 0 0 0 59.95432334853666 149.8948727626087 L 34.8912666900564 173.26134271170574 z" stroke="transparent"></path></g><g id="SvgjsG1261" class="apexcharts-series apexcharts-pie-series" seriesName="Exmail" rel="4" data:realIndex="3"><path id="SvgjsPath1262" d="M 44.91337657308285 30.394971376422504 A 97.90243902439025 97.90243902439025 0 0 1 106.48291280101965 8.597562466749167 L 106.48889332066277 42.863415603386954 A 63.63658536585366 63.63658536585366 0 0 0 66.46869477250385 57.03173139467462 L 44.91337657308285 30.394971376422504 z" fill="rgba(255,188,0,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-3" index="0" j="3" data:angle="38.980891719745216" data:startAngle="321.0191082802547" data:strokeWidth="2" data:value="17" data:pathOrig="M 44.91337657308285 30.394971376422504 A 97.90243902439025 97.90243902439025 0 0 1 106.48291280101965 8.597562466749167 L 106.48889332066277 42.863415603386954 A 63.63658536585366 63.63658536585366 0 0 0 66.46869477250385 57.03173139467462 L 44.91337657308285 30.394971376422504 z" stroke="transparent"></path></g><text id="SvgjsText1236" font-family="Helvetica, Arial, sans-serif" x="168.7751672500915" y="55.06540420873238" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600" fill="#ffffff" class="apexcharts-text apexcharts-pie-label" style="font-family: Helvetica, Arial, sans-serif;" filter="url(#SvgjsFilter1237)">28.0%</text><text id="SvgjsText1245" font-family="Helvetica, Arial, sans-serif" x="128.832134864309" y="184.12080811638248" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600" fill="#ffffff" class="apexcharts-text apexcharts-pie-label" style="font-family: Helvetica, Arial, sans-serif;" filter="url(#SvgjsFilter1246)">35.0%</text><text id="SvgjsText1254" font-family="Helvetica, Arial, sans-serif" x="25.92849294727266" y="100.84788964277385" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600" fill="#ffffff" class="apexcharts-text apexcharts-pie-label" style="font-family: Helvetica, Arial, sans-serif;" filter="url(#SvgjsFilter1255)">26.1%</text><text id="SvgjsText1263" font-family="Helvetica, Arial, sans-serif" x="79.55127907226216" y="30.358811799415292" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600" fill="#ffffff" class="apexcharts-text apexcharts-pie-label" style="font-family: Helvetica, Arial, sans-serif;" filter="url(#SvgjsFilter1264)">10.8%</text></g></g></g><line id="SvgjsLine1270" x1="0" y1="0" x2="213" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1271" x1="0" y1="0" x2="213" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line></g><g id="SvgjsG1226" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend"></div><div class="apexcharts-tooltip apexcharts-theme-dark"><div class="apexcharts-tooltip-series-group"><span class="apexcharts-tooltip-marker" style="background-color: rgb(114, 124, 245);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group"><span class="apexcharts-tooltip-marker" style="background-color: rgb(10, 207, 151);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group"><span class="apexcharts-tooltip-marker" style="background-color: rgb(250, 92, 124);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group"><span class="apexcharts-tooltip-marker" style="background-color: rgb(255, 188, 0);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div></div></div>
+
+
+                      <div class="chart-widget-list">
+                          <p>
+                              <i class="mdi mdi-square text-primary"></i> Direct
+                              <span class="float-right">$300.56</span>
+                          </p>
+                          <p>
+                              <i class="mdi mdi-square text-danger"></i> Affilliate
+                              <span class="float-right">$135.18</span>
+                          </p>
+                          <p>
+                              <i class="mdi mdi-square text-success"></i> Sponsored
+                              <span class="float-right">$48.96</span>
+                          </p>
+                          <p class="mb-0">
+                              <i class="mdi mdi-square text-warning"></i> E-mail
+                              <span class="float-right">$154.02</span>
+                          </p>
+                      </div>
+                  <div class="resize-triggers"><div class="expand-trigger"><div style="width: 370px; height: 501px;"></div></div><div class="contract-trigger"></div></div></div> <!-- end card-body-->
+              </div> <!-- end card-->
+          </div> <!-- end col-->
+
+          <div class="col-xl-3 col-lg-6 order-lg-1">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="dropdown float-right">
+                          <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                              <i class="mdi mdi-dots-vertical"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Profit</a>
+                              <!-- item-->
+                              <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                          </div>
+                      </div>
+                      <h4 class="header-title mb-2">Recent Activity</h4>
+
+                      <div data-simplebar="init" style="max-height: 424px;"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
+                          <div class="timeline-alt pb-0">
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-info font-weight-bold mb-1 d-block">You sold an item</a>
+                                      <small>Paul Burgess just purchased “Hyper - Admin Dashboard”!</small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">5 minutes ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-primary font-weight-bold mb-1 d-block">Product on the Bootstrap Market</a>
+                                      <small>Dave Gamache added
+                                          <span class="font-weight-bold">Admin Dashboard</span>
+                                      </small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">30 minutes ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-microphone bg-info-lighten text-info timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-info font-weight-bold mb-1 d-block">Robert Delaney</a>
+                                      <small>Send you message
+                                          <span class="font-weight-bold">"Are you there?"</span>
+                                      </small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">2 hours ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-upload bg-primary-lighten text-primary timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-primary font-weight-bold mb-1 d-block">Audrey Tobey</a>
+                                      <small>Uploaded a photo
+                                          <span class="font-weight-bold">"Error.jpg"</span>
+                                      </small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">14 hours ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-upload bg-info-lighten text-info timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-info font-weight-bold mb-1 d-block">You sold an item</a>
+                                      <small>Paul Burgess just purchased “Hyper - Admin Dashboard”!</small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">16 hours ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-primary font-weight-bold mb-1 d-block">Product on the Bootstrap Market</a>
+                                      <small>Dave Gamache added
+                                          <span class="font-weight-bold">Admin Dashboard</span>
+                                      </small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">22 hours ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+
+                              <div class="timeline-item">
+                                  <i class="mdi mdi-microphone bg-info-lighten text-info timeline-icon"></i>
+                                  <div class="timeline-item-info">
+                                      <a href="#" class="text-info font-weight-bold mb-1 d-block">Robert Delaney</a>
+                                      <small>Send you message
+                                          <span class="font-weight-bold">"Are you there?"</span>
+                                      </small>
+                                      <p class="mb-0 pb-2">
+                                          <small class="text-muted">2 days ago</small>
+                                      </p>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end timeline -->
+                      </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 643px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 279px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div> <!-- end slimscroll -->
+                  </div>
+                  <!-- end card-body -->
+              </div>
+              <!-- end card-->
+          </div>
+          <!-- end col -->
+
+      </div>
+      <!-- end row -->
+
+  </div>
+  <!-- container -->
+
+</div>

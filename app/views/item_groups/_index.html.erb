@@ -16,7 +16,7 @@
       <div id="<%= collapse_label %>" class="collapse <%= shown ? "show" : nil %>" aria-labelledby="<%= card_label %>" data-parent="#accordion">
         <div class="card-body">
           <%= render partial: 'items/index', locals: { items: item_group.items } %>
-          <%= link_to 'Add Item', new_project_item_group_item_path(@project, item_group) %>
+          <%= link_to 'Add Item', new_project_item_group_item_path(@project, item_group), class: 'btn btn-outline-primary'%>
         </div>
       </div>
     </div>
