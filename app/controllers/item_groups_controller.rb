@@ -25,7 +25,7 @@ class ItemGroupsController < ApplicationController
   # POST /item_groups
   # POST /item_groups.json
   def create
-    @item_group = ItemGroup.new(item_group_params)
+    @item_group = @project.item_groups.build(item_group_params)
 
     respond_to do |format|
       if @item_group.save

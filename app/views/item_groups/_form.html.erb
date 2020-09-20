@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :project_id %>
-    <%= form.text_field :project_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
     <%= form.label :budget %>
-    <%= form.number_field :budget %>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">$</span>
+      </div>
+      <%= form.number_field :budget %>
+    </div>
   </div>
 
   <div class="actions">

@@ -3,17 +3,18 @@
     <tr>
       <th>Name</th>
       <th>Quantity</th>
-      <th>Purchase price cents</th>
+      <th>Purchase price</th>
       <th colspan=2></th>
     </tr>
   </thead>
 
   <tbody>
+    <% total_spent = humanized_money_with_symbol(items.map(&:purchase_price).select{ |s| s.present? }.sum || 0) %>
     <% items.each do |item| %>
       <tr>
         <td><%= item.name %></td>
         <td><%= item.quantity %></td>
-        <td><%= item.purchase_price_cents %></td>
+        <td><%= item.purchase_price&.format || 'Not Purchased' %></td>
         <td>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
             Edit
@@ -25,5 +26,12 @@
         <td><%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
+      <tr>
+        <td></td>
+        <td><b>Total Spent: </b></td>
+        <td> <%= total_spent %> </td>
+        <td></td>
+        <td></td>
+      </tr>
   </tbody>
 </table>
