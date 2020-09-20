@@ -14,7 +14,14 @@
         <td><%= item.name %></td>
         <td><%= item.quantity %></td>
         <td><%= item.purchase_price_cents %></td>
-        <td><%= link_to 'Edit', edit_project_item_group_item_path(item.item_group.project, item.item_group, item), class: 'btn' %></td>
+        <td>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
+            Edit
+          </button>
+          <div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
+            <%= render partial: 'items/modal_form', locals: { item: item } %>
+          </div>
+        </td>
         <td><%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
