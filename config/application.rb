@@ -6,12 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-if Rails.env.production?
-  Raven.configure do |config|
-    config.dsn = Rails.application.credentials.config[:raven][:dsn]
-  end
-end
-
 
 module Budgetr
   class Application < Rails::Application

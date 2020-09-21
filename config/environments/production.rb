@@ -1,4 +1,7 @@
 Rails.application.configure do
+  Raven.configure do |config|
+    config.dsn = Rails.application.credentials.config[:raven][:dsn]
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
