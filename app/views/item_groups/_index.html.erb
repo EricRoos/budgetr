@@ -10,13 +10,15 @@
           <button class="btn btn-link" data-toggle="collapse" data-target="#<%= collapse_label %>" aria-expanded="false" aria-controls="<%= collapse_label %>">
             <%= item_group.name %> ( <%=total_spent%> / <%= humanized_money_with_symbol(item_group.budget) %> )
           </button>
-          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
-            Edit
-          </button>
-          <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
-            <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+          <div>
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
+              Edit
+            </button>
+            <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
+              <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+            </div>
+            <%= link_to 'Delete', project_item_group_path(@project, item_group), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure' }%>
           </div>
-          <%= link_to 'Delete', project_item_group_path(@project, item_group), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure' }%>
         </h5>
       </div>
 

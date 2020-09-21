@@ -51,6 +51,6 @@
       <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: @project) } %>
     </div>
     <h4 class="header-title mb-3">Item Groups</h4>
-    <%= render partial: 'item_groups/index', locals: { item_groups: @project.item_groups } %>
+    <%= render partial: 'item_groups/index', locals: { item_groups: @project.item_groups.order(name: :asc) } %>
   </div>
 </div>
