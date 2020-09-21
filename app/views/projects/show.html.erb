@@ -13,7 +13,7 @@
   <% callout_boxes << { title: "Available to Spend", content: humanized_money_with_symbol(@project.budget_remaining) } %>
   <% callout_boxes << { title: "Total Spent", content: humanized_money_with_symbol(@project.budget - @project.budget_remaining) } %>
   <% callout_boxes << { title: "Budget", content: humanized_money_with_symbol(@project.budget) } %>
-  <% callout_boxes << { title: "Total Allocated", content: "#{humanized_money_with_symbol(@project.allocated_budget)} ( #{(100*(@project.allocated_budget / @project.budget.to_f)).to_i rescue 0 }% )" } %>
+  <% callout_boxes << { title: "Total Allocated", content: "#{humanized_money_with_symbol(@project.allocated_budget)}", small: "#{(100*(@project.allocated_budget / @project.budget.to_f)).to_i rescue 0 }%"} %>
   <div class="row">
     <% callout_boxes.each do |callout_box| %>
       <div class="col-lg-3">
@@ -25,6 +25,8 @@
             <h5 class="text-muted font-weight-normal mt-0" title="Budget"><%= callout_box[:title] %></h5>
             <h3 class="mt-3 mb-3"><%= callout_box[:content] %></h3>
             <p class="mb-0 text-muted">
+              <%= callout_box[:small] %>
+              &nbsp;
             </p>
           </div> <!-- end card-body-->
         </div> <!-- end card-->
@@ -33,7 +35,6 @@
   </div> <!-- end row -->
   <%= link_to 'Update', edit_project_path(@project) %>
 </div>
-<hr/>
 
 <div class="card">
   <div class="card-body" style="position: relative;">
