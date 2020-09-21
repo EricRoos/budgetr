@@ -11,7 +11,15 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Budgetr</a>
+    </nav>
     <div class='container'>
+      <% if notice.present? %>
+        <div class="alert alert-primary" role="alert">
+          <%= notice %>
+        </div> 
+      <% end %>
       <%= yield %>
     </div>
   </body>

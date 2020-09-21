@@ -4,7 +4,6 @@
     <li class="breadcrumb-item active" aria-current="page"><%= @project.name %></li>
   </ol>
 </nav>
-<p id="notice"><%= notice %></p>
 <div class="jumbotron">
   <h1>
     <%= @project.name %>
@@ -43,8 +42,13 @@
             <i class="mdi mdi-dots-vertical"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <%= link_to 'Add Item Group', new_project_item_group_path(@project) %>
+          <a class='dropdown-item' href='#'data-toggle="modal" data-target="#itemGroupModal">
+            Add Item Group 
+          </a>
         </div>
+    </div>
+    <div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel" aria-hidden="true">
+      <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: @project) } %>
     </div>
     <h4 class="header-title mb-3">Item Groups</h4>
     <%= render partial: 'item_groups/index', locals: { item_groups: @project.item_groups } %>

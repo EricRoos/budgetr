@@ -1,0 +1,17 @@
+<div class="field">
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</div>
+
+<div class="field">
+  <%= form.label :budget %>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">$</span>
+    </div>
+    <%= form.number_field :budget %>
+    <div class="input-group-append">
+      <span class="input-group-text"> / <%= humanized_money_with_symbol(budget_remaining) %></span>
+    </div>
+  </div>
+</div>

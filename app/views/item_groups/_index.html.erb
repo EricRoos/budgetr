@@ -10,7 +10,12 @@
           <button class="btn btn-link" data-toggle="collapse" data-target="#<%= collapse_label %>" aria-expanded="false" aria-controls="<%= collapse_label %>">
             <%= item_group.name %> ( <%=total_spent%> / <%= humanized_money_with_symbol(item_group.budget) %> )
           </button>
-          <%= link_to 'Edit', edit_project_item_group_path(@project, item_group), class: 'btn btn-outline-primary'%>
+          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
+            Edit
+          </button>
+          <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
+            <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+          </div>
           <%= link_to 'Delete', project_item_group_path(@project, item_group), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure' }%>
         </h5>
       </div>
@@ -18,7 +23,12 @@
       <div id="<%= collapse_label %>" class="collapse <%= shown ? "show" : nil %>" aria-labelledby="<%= card_label %>" data-parent="#accordion">
         <div class="card-body">
           <%= render partial: 'items/index', locals: { items: item_group.items } %>
-          <%= link_to 'Add Item', new_project_item_group_item_path(@project, item_group), class: 'btn btn-outline-primary'%>
+          <button class='btn btn-outline-primary' href='#'data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
+            Add Item
+          </button>
+          <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+            <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
+          </div>
         </div>
       </div>
     </div>

@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to project_path(@project, shownItemGroup: @item.item_group.id), notice: 'Item was successfully created.' }
+        format.html { redirect_to project_path(@project, anchor: "item-tr-#{@item.id}", shownItemGroup: @item.item_group.id), notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to project_path(@project, shownItemGroup: @item.item_group.id), notice: 'Item was successfully updated.' }
+        format.html { redirect_to project_path(@project, anchor: "item-tr-#{@item.id}", shownItemGroup: @item.item_group.id), notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -57,8 +57,9 @@ class ItemsController < ApplicationController
   # DELETE /items/1.json
   def destroy
     @item.destroy
+    last_item = @item_group.items.last
     respond_to do |format|
-      format.html { redirect_to @project, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to project_path(@project, anchor: "item-tr-#{last_item&.id}", shownItemGroup: @item_group.id), notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

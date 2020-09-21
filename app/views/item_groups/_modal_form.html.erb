@@ -1,0 +1,20 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="itemGroupModalLabel<%= item_group.id %>">Item Group</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <%= form_with(model: [item_group.project,item_group ], local: true) do |form| %>
+      <div class="modal-body">
+          <% project = item_group.project %>
+          <%= render partial: 'item_groups/fields', locals: { form: form, budget_remaining: (project.budget - project.allocated_budget)  } %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= form.submit class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
