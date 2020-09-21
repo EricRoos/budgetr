@@ -73,6 +73,6 @@ class ItemGroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_group_params
-      params.require(:item_group).permit(:project_id, :name, :budget)
+      params.require(:item_group).permit(:project_id, :name, :budget, :note)
     end
 end

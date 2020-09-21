@@ -1,38 +1,40 @@
 <div id="accordion">
   <% item_groups.each do |item_group| %>
-    <% card_label = "headingItemGroup#{item_group.id}" %>
-    <% collapse_label = "collapseItemGroup#{item_group.id}" %>
-    <% shown = params[:shownItemGroup]&.to_i == item_group.id%>
-    <% total_spent = humanized_money_with_symbol(item_group.items.map(&:purchase_price).select{ |s| s.present? }.sum || 0) %>
-    <div class="card">
-      <div class="card-header" id="<%= card_label %>">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#<%= collapse_label %>" aria-expanded="false" aria-controls="<%= collapse_label %>">
-            <%= item_group.name %> ( <%=total_spent%> / <%= humanized_money_with_symbol(item_group.budget) %> )
-          </button>
-          <div>
-            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
-              Edit
+    <% cache item_group do %>
+      <% card_label = "headingItemGroup#{item_group.id}" %>
+      <% collapse_label = "collapseItemGroup#{item_group.id}" %>
+      <% shown = params[:shownItemGroup]&.to_i == item_group.id%>
+      <% total_spent = humanized_money_with_symbol(item_group.items.map(&:purchase_price).select{ |s| s.present? }.sum || 0) %>
+      <div class="card">
+        <div class="card-header" id="<%= card_label %>">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#<%= collapse_label %>" aria-expanded="false" aria-controls="<%= collapse_label %>">
+              <%= item_group.name %> ( <%=total_spent%> / <%= humanized_money_with_symbol(item_group.budget) %> )
             </button>
-            <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
-              <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+            <div>
+              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
+                Edit
+              </button>
+              <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
+                <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+              </div>
+              <%= link_to 'Delete', project_item_group_path(@project, item_group), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure' }%>
             </div>
-            <%= link_to 'Delete', project_item_group_path(@project, item_group), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure' }%>
-          </div>
-        </h5>
-      </div>
+          </h5>
+        </div>
 
-      <div id="<%= collapse_label %>" class="collapse <%= shown ? "show" : nil %>" aria-labelledby="<%= card_label %>" data-parent="#accordion">
-        <div class="card-body">
-          <%= render partial: 'items/index', locals: { items: item_group.items } %>
-          <button class='btn btn-outline-primary' href='#'data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
-            Add Item
-          </button>
-          <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
-            <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
+        <div id="<%= collapse_label %>" class="collapse <%= shown ? "show" : nil %>" aria-labelledby="<%= card_label %>" data-parent="#accordion">
+          <div class="card-body">
+            <%= render partial: 'items/index', locals: { items: item_group.items } %>
+            <button class='btn btn-outline-primary' href='#'data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
+              Add Item
+            </button>
+            <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+              <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
