@@ -29,7 +29,6 @@ RUN bundle install --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` 
 COPY . /app
 
 RUN RAILS_MASTER_KEY=${RAILS_MASTER_KEY} bundle exec rake assets:precompile \
-  && RAILS_MASTER_KEY=${RAILS_MASTER_KEY} bundle exec rake assets:sync \
   && rm -rf node_modules/
 
 EXPOSE 3000
