@@ -3,7 +3,16 @@ class Project < ApplicationRecord
   has_many :items, through: :item_groups
 
   def budget_remaining
-    @budget_remaining ||= (( budget || 0 )- (items.sum(:purchase_price_cents) / 100))
+    item_price_sum = items.map { |i|
+      if i.purchase_price_cents && i.quantity
+        i.purchase_price_cents * i.quantity
+      elsif i.purchase_price_cents && !i.quantity.present?
+        i.purchase_price
+      else
+        0
+      end
+    }.sum
+    @budget_remaining ||= (( budget || 0 )- (item_price_sum / 100))
   end
 
   def allocated_budget
