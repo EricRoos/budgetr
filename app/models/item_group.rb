@@ -13,6 +13,6 @@ class ItemGroup < ApplicationRecord
 
   private
     def total_spent_on(items)
-      items.pluck(:purchase_price_cents, :quantity).reject{ |r| r[0].empty? || r[1].empty }.map{ |i| i.inject(:*) }.sum
+      items.pluck(:purchase_price_cents, :quantity).reject{ |r| r[0].blank? || r[1].blank? }.compact.map{ |i| i.inject(:*) }.sum
     end
 end
