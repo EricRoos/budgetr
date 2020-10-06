@@ -8,7 +8,6 @@
   </thead>
 
   <tbody>
-    <% total_spent = humanized_money_with_symbol(items.map(&:purchase_price).select{ |s| s.present? }.sum || 0) %>
     <% items.each do |item| %>
       <% cache item do %>
         <tr style="<%= item.purchased? ? "text-decoration: line-through" : "" %>">
@@ -33,11 +32,5 @@
         </tr>
       <% end %>
     <% end %>
-    <tr>
-      <td><b>Total Spent: </b></td>
-      <td><%= total_spent %></td>
-      <td></td>
-      <td></td>
-    </tr>
   </tbody>
 </table>
