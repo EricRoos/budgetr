@@ -10,10 +10,9 @@
   </h1>
 
   <% callout_boxes = [] %>
-  <% callout_boxes << { title: "Available to Spend", content: humanized_money_with_symbol(@project.budget_remaining) } %>
-  <% callout_boxes << { title: "Total Spent", content: humanized_money_with_symbol(@project.budget - @project.budget_remaining) } %>
+  <% callout_boxes << { title: "Total Spent", content: @project.item_groups.map(&:total_spent).inject(:+) } %>
+  <% callout_boxes << { title: "Total Allocated", content: @project.item_groups.map(&:total_allocated).inject(:+) } %>
   <% callout_boxes << { title: "Budget", content: humanized_money_with_symbol(@project.budget) } %>
-  <% callout_boxes << { title: "Total Allocated", content: "#{humanized_money_with_symbol(@project.allocated_budget)}", small: "#{(100*(@project.allocated_budget / @project.budget.to_f)).to_i rescue 0 }%"} %>
   <div class="row">
     <% callout_boxes.each do |callout_box| %>
       <div class="col-lg-3">
@@ -43,7 +42,7 @@
             <i class="mdi mdi-dots-vertical"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class='dropdown-item' href='#'data-toggle="modal" data-target="#itemGroupModal">
+          <a class='dropdown-item' href='#' data-toggle="modal" data-target="#itemGroupModal">
             Add Item Group 
           </a>
         </div>
@@ -51,7 +50,18 @@
     <div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel" aria-hidden="true">
       <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: @project) } %>
     </div>
-    <h4 class="header-title mb-3">Item Groups</h4>
-    <%= render partial: 'item_groups/index', locals: { item_groups: @project.item_groups.order(name: :asc) } %>
+    <% item_group_header_text = 'Rooms' %>
+    <h4 class="header-title mb-3"><%= item_group_header_text %></h4>
+    <table>
+      <thead>
+      </thead>
+      <tbody>
+        <% @project.item_groups.order(name: :asc).each do |item_group| %>
+          <% total_spent = humanized_money_with_symbol(item_group.items.map(&:purchase_price).select{ |s| s.present? }.sum || 0) %>
+          <% total_spent_presented = "(#{total_spent} / #{humanized_money_with_symbol(item_group.budget)})" %>
+          <tr><td><%=link_to "#{item_group.name} #{total_spent_presented}", [@project, item_group] %></td></tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

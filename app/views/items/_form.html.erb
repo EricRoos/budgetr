@@ -1,4 +1,4 @@
-<%= form_with(model: [item.item_group.project, item.item_group, item], local: true) do |form| %>
+<%= form_with(model: [item.item_group.project, item.item_group, item]) do |form| %>
   <% if item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>

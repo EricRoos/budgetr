@@ -1,0 +1,8 @@
+<div class="card-body">
+  <button class='btn btn-outline-primary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
+    Add Item
+  </button>
+  <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+    <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
+  </div>
+</div>

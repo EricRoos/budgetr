@@ -1,0 +1,28 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Projects', projects_path %></li>
+    <li class="breadcrumb-item" aria-current="page"><%= link_to item_group.project.name, item_group.project %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= item_group.name %></li>
+  </ol>
+</nav>
+<% cache item_group do %>
+  <% total_spent = item_group.total_spent.format %>
+  <h3>
+    Budget:
+    ( <%=total_spent%> / <%= humanized_money_with_symbol(item_group.budget) %> )
+  </h3>
+  <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
+    Edit
+  </button>
+  <button class='btn btn-outline-secondary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
+    Add Item
+  </button>
+  <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
+    <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+  </div>
+  <% groups = item_group.items.order("id asc") %>
+  <%= render partial: 'items/index', locals: { items: groups } %>
+  <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+    <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
+  </div>
+<% end %>

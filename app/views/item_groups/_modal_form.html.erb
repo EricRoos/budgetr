@@ -6,15 +6,15 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <%= form_with(model: [item_group.project,item_group ], local: true) do |form| %>
       <div class="modal-body">
+        <%= form_with(model: [item_group.project,item_group ], local: true) do |form| %>
           <% project = item_group.project %>
           <%= render partial: 'item_groups/fields', locals: { form: form, budget_remaining: (project.budget - project.allocated_budget)  } %>
+          <%= form.submit class: 'btn btn-primary' %>
+        <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= form.submit class: 'btn btn-primary' %>
       </div>
-    <% end %>
   </div>
 </div>

@@ -6,14 +6,46 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <%= form_with(model: [item.item_group.project, item.item_group, item], local: true) do |form| %>
-      <div class="modal-body">
-          <%= render partial: 'items/fields', locals: { form: form } %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
+    <div class="modal-body">
+      <%= form_with(model: item, url:url,id: "itemForm#{item.id}") do |form| %>
+        <% id_prefix = "item_#{form.object.id}_" %>
+        <div class="field">
+          <%= form.label :name %>
+          <%= form.text_field :name, autofocus: true, id: "#{id_prefix}name" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :quantity %>
+          <%= form.number_field :quantity, id: "#{id_prefix}qty" %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Price" %>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <%= form.number_field :purchase_price,  step: "0.01",id: "#{id_prefix}price" %>
+          </div>
+        </div>
+
+        <% if form.object.persisted? %>
+          <div class="form-check">
+            <%= form.check_box :purchased, class: 'form-check-input', id: "#{id_prefix}purchased" %>
+            <%= form.label :purchased, class: 'form-check-label' %>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label :note %>
+          <%= form.rich_text_area :note, id: "#{id_prefix}note" %>
+        </div>
         <%= form.submit class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
   </div>
 </div>

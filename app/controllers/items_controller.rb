@@ -31,6 +31,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html { redirect_to project_path(@project, anchor: "item-tr-#{@item.id}", shownItemGroup: @item.item_group.id), notice: 'Item was successfully created.' }
+        format.js
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -45,6 +46,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to project_path(@project, anchor: "item-tr-#{@item.id}", shownItemGroup: @item.item_group.id), notice: 'Item was successfully updated.' }
+        format.js
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -80,6 +82,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:item_group_id, :name, :quantity, :purchase_price, :note)
+      params.require(:item).permit(:item_group_id, :name, :quantity, :purchase_price, :note, :purchased)
     end
 end
