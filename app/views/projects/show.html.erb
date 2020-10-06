@@ -57,7 +57,7 @@
       </thead>
       <tbody>
         <% @project.item_groups.order(name: :asc).each do |item_group| %>
-          <% total_spent = humanized_money_with_symbol(item_group.items.map(&:purchase_price).select{ |s| s.present? }.sum || 0) %>
+          <% total_spent = item_group.total_spent %>
           <% total_spent_presented = "(#{total_spent} / #{humanized_money_with_symbol(item_group.budget)})" %>
           <tr>
             <td><%=link_to "#{item_group.name} #{total_spent_presented}", [@project, item_group] %></td>
