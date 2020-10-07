@@ -39,7 +39,7 @@
             <div class='d-none d-md-block'>
               <% if !item.purchased %>
                 <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-                <%= form_with(model: item, url:url) do |form| %>
+                <%= form_with(model: item, url:url, html: { style: 'display: inline' }) do |form| %>
                   <%= form.hidden_field :purchased, value: true %>
                   <%= form.submit value: 'Purchase', class: 'btn btn-outline-success' %>
                 <% end %>
