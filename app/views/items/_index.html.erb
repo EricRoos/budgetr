@@ -11,7 +11,7 @@
   <tbody>
     <% items.each do |item| %>
       <% cache item do %>
-        <tr scope="row" class="<%= "bg-warning" if item.note.empty? && item.purchase_price > 0 && !item.purchased %> <%= item.purchased? ? "table-dark" : "" %>" style="<%= item.purchased? ? "text-decoration: line-through" : "" %>">
+        <tr scope="row" class="<%= "bg-warning" if item.note.empty? && (item.purchase_price || 0) > 0 && !item.purchased %> <%= item.purchased? ? "table-dark" : "" %>" style="<%= item.purchased? ? "text-decoration: line-through" : "" %>">
           <td><%= item.name %> x <%= item.quantity %></td>
           <td><%= (item.purchase_price || Money.new(0))&.format %></td>
           <td><%= item.total_price&.format %></td>
