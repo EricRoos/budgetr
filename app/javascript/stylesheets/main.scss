@@ -5,7 +5,6 @@ button, input[type='submit'] {
 
 table {
   @extend .table;
-  @extend .table-striped;
 }
 
 .field {
