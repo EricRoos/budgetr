@@ -1,4 +1,9 @@
 $("#itemEditModal<%=@item.id%>").on('hidden.bs.modal', function() {
   $("div[data-item-group-id='<%= @item.item_group.id%>']").html("<%=j render @item.item_group %>");
 });
-$("#itemEditModal<%=@item.id%>").modal('hide');
+var selector = "#itemEditModal<%=@item.id%>";
+if($(selector+":visible").length){
+  $(selector).modal('hide');
+}else{
+  $("div[data-item-group-id='<%= @item.item_group.id%>']").html("<%=j render @item.item_group %>");
+}

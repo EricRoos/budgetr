@@ -22,6 +22,13 @@
                   Actions
                 </button>
                 <div class="dropdown-menu" aria-labelledby="itemActionsdropdownMenuButton<%=item.id%>">
+                  <% if !item.purchased %>
+                    <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
+                    <%= form_with(model: item, url:url) do |form| %>
+                      <%= form.hidden_field :purchased, value: true %>
+                      <%= form.submit value: 'Purchase', class: 'dropdown-item' %>
+                    <% end %>
+                  <% end %>
                   <a class="dropdown-item" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
                     Edit
                   </a>
@@ -30,6 +37,13 @@
               </div>
             </div>
             <div class='d-none d-md-block'>
+              <% if !item.purchased %>
+                <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
+                <%= form_with(model: item, url:url) do |form| %>
+                  <%= form.hidden_field :purchased, value: true %>
+                  <%= form.submit value: 'Purchase', class: 'btn btn-outline-success' %>
+                <% end %>
+              <% end %>
               <a class="btn btn-outline-primary" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
                 Edit
               </a>
