@@ -44,7 +44,7 @@
   <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
     <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
   </div>
-  <% groups = item_group.items.order("purchased asc, created_at asc") %>
+  <% groups = item_group.items.order("purchased asc nulls last, created_at asc") %>
   <%= render partial: 'items/index', locals: { items: groups } %>
   <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
     <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
