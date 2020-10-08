@@ -26,3 +26,5 @@ require("trix")
 require("@rails/actiontext")
 
 require("@rails/ujs").start()
+
+$('.toast').toast({delay: 1500})

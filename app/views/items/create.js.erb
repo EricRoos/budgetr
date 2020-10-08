@@ -1,4 +1,6 @@
 $("#newItemModal<%=@item.item_group.id%>").on('hidden.bs.modal', function() {
+  $('.toast .toast-body').html("Successfully added")
+  $('.toast').toast('show');
   $("div[data-item-group-id='<%= @item.item_group.id%>']").html("<%=j render @item.item_group %>");
 });
 $("#newItemModal<%=@item.item_group.id%>").modal('hide');
