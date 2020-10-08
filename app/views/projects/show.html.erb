@@ -9,9 +9,6 @@
   </h1>
 
   <% callout_boxes = [] %>
-  <% callout_boxes << { title: "Total Spent", content: @project.item_groups.map(&:total_spent).inject(:+).format } %>
-  <% callout_boxes << { title: "Total Allocated", content: @project.item_groups.map(&:total_allocated).inject(:+).format } %>
-  <% callout_boxes << { title: "Budget", content: humanized_money_with_symbol(@project.budget) } %>
   <div class="row">
     <% callout_boxes.each do |callout_box| %>
       <div class="col-lg-4 text-center">
@@ -31,26 +28,39 @@
       </div> <!-- end col-->
     <% end %>
   </div> <!-- end row -->
-  <%= link_to 'Update', edit_project_path(@project) %>
 </div>
 
-<div class="card">
-  <div class="card-body" style="position: relative;">
-    <div class="dropdown float-right">
-        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-            <i class="mdi mdi-dots-vertical"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <a class='dropdown-item' href='#' data-toggle="modal" data-target="#itemGroupModal">
-            Add Item Group 
-          </a>
+<div class='row'>
+  <div class="col-md-4">
+    <ul class="list-group mb-3">
+      <% callout_boxes << { title: "Total Spent", content: @project.item_groups.map(&:total_spent).inject(:+).format } %>
+      <% callout_boxes << { title: "Total Allocated", content: @project.item_groups.map(&:total_allocated).inject(:+).format } %>
+      <% callout_boxes << { title: "Budget", content: humanized_money_with_symbol(@project.budget) } %>
+      <% callout_boxes.each do |callout_box| %>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0"><%= callout_box[:title] %></h6>
+            <small class="text-muted"><%= callout_box[:help] %></small>
+          </div>
+          <span class="text-muted">
+            <%= callout_box[:content] %>
+          </span>
+        </li>
+      <% end %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <button class='btn btn-block btn-primary btn-outline' href='#' data-toggle="modal" data-target="#itemGroupModal">
+          Add Room
+        </button>
+        <div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel" aria-hidden="true">
+          <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: @project) } %>
         </div>
-    </div>
-    <div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel" aria-hidden="true">
-      <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: @project) } %>
-    </div>
-    <% item_group_header_text = 'Rooms' %>
-    <h4 class="header-title mb-3"><%= item_group_header_text %></h4>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <h3 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="badge badge-secondary badge-pill"><%= @project.item_groups.size %> room(s)</span>
+    </h3>
     <table class='table table-sm'>
       <thead>
       </thead>
