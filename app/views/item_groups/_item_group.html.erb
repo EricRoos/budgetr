@@ -28,12 +28,14 @@
       </li>
       <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div class='w-100'>
-          <button type="button" class="btn btn-sm btn-block btn-outline-secondary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
-            Edit Room
-          </button>
           <button class='btn btn-sm btn-block btn-primary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
             Add Item
           </button>
+          <button type="button" class="btn btn-sm btn-block btn-outline-secondary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
+            Edit Room
+          </button>
+          <hr/>
+          <%= link_to "Delete Room", [@project, item_group], method: :delete, class: 'btn btn-block btn-sm btn-outline-danger', data: { confirm: 'Are you sure?' } %> </td>
         </div>
         <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
           <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>

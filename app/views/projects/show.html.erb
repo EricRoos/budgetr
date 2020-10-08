@@ -70,7 +70,6 @@
           <% total_spent_presented = "(#{total_spent.format} / #{humanized_money_with_symbol(item_group.budget)})" %>
           <tr>
             <td> <%=link_to "#{item_group.name} #{total_spent_presented}", [@project, item_group] %></td>
-            <td> <%= link_to "Delete", [@project, item_group], method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } %> </td>
           </tr>
         <% end %>
       </tbody>
