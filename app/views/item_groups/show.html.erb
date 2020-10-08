@@ -1,3 +1,9 @@
+<% content_for :breadcrumbs do %>
+  <li class="breadcrumb-item"><%= link_to 'Projects', projects_path %></li>
+  <li class="breadcrumb-item" aria-current="page"><%= link_to @item_group.project.name, @item_group.project %></li>
+  <li class="breadcrumb-item active" aria-current="page"><%= @item_group.name %></li>
+<% end %>
+
 <div data-item-group-id="<%=@item_group.id%>">
   <%= render @item_group %>
 </div>

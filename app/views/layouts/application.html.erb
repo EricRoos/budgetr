@@ -16,13 +16,20 @@
     <nav class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Budgetr</a>
     </nav>
-    <div class='container bg-white pt-2 h-100'>
+    <div class='container pt-2 h-100'>
       <% if notice.present? %>
         <div class="alert alert-primary" role="alert">
           <%= notice %>
         </div> 
       <% end %>
-      <%= yield %>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <%= yield :breadcrumbs %>
+        </ol>
+      </nav>
+      <main class='bg-white p-3 rounded'>
+        <%= yield %>
+      </main>
     </div>
   </body>
 </html>
