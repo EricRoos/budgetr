@@ -59,7 +59,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1.json
   def destroy
     @item.destroy
-    last_item = @item_group.items.last
+    session[:restorable_id] = @item.versions.last.id
     respond_to do |format|
       format.html { redirect_to project_item_group_path(@project, @item_group), notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }

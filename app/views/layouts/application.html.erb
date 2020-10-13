@@ -22,6 +22,12 @@
           <%= notice %>
         </div> 
       <% end %>
+      <% if @restorable.present? %>
+        <div class="alert alert-secondary" role="alert">
+          Restore last delete?
+          <%= button_to 'Restore', restore_version_path(id: @restorable), class: 'btn btn-primary btn-sm' %>
+        </div> 
+      <% end %>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <%= yield :breadcrumbs %>

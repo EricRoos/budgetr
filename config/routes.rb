@@ -14,4 +14,6 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'versions/:id/restore', to: 'versions#restore', as: 'restore_version'
+
 end
