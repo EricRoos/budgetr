@@ -20,6 +20,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'graphql'
 gem 'money-rails'
 gem 'dalli'
+gem 'paper_trail'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

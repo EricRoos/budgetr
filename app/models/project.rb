@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  has_paper_trail
   has_many :item_groups
   has_many :items, through: :item_groups
 
