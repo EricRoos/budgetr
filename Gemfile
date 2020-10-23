@@ -21,6 +21,7 @@ gem 'graphql'
 gem 'money-rails'
 gem 'dalli'
 gem 'paper_trail'
+gem 'lograge'
 
 
 # Use Redis adapter to run Action Cable in production

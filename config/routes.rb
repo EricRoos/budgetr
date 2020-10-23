@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
   post 'versions/:id/restore', to: 'versions#restore', as: 'restore_version'
 
+  get '*unmatched_route', to: 'application#route_not_found'
+
 end

@@ -3,40 +3,17 @@
   <li class="breadcrumb-item active" aria-current="page"><%= @project.name %></li>
 <% end %>
 
+<% presenter = Projects::Show.new(project: @project) %>
 <div class="jumbotron">
   <h1>
-    <%= @project.name %>
+    <%= presenter.project_name %>
   </h1>
-
-  <% callout_boxes = [] %>
-  <div class="row">
-    <% callout_boxes.each do |callout_box| %>
-      <div class="col-lg-4 text-center">
-        <div class="card widget-flat">
-          <div class="card-body">
-            <div class="float-right">
-                <i class="mdi mdi-currency-usd widget-icon"></i>
-            </div>
-            <h5 class="text-muted font-weight-normal mt-0" title="Budget"><%= callout_box[:title] %></h5>
-            <h3 class="mt-3 mb-3"><%= callout_box[:content] %></h3>
-            <p class="mb-0 text-muted">
-              <%= callout_box[:small] %>
-              &nbsp;
-            </p>
-          </div> <!-- end card-body-->
-        </div> <!-- end card-->
-      </div> <!-- end col-->
-    <% end %>
-  </div> <!-- end row -->
 </div>
 
 <div class='row'>
   <div class="col-md-4">
     <ul class="list-group mb-3">
-      <% callout_boxes << { title: "Total Spent", content: @project.item_groups.map(&:total_spent).inject(:+).format } %>
-      <% callout_boxes << { title: "Total Allocated", content: @project.item_groups.map(&:total_allocated).inject(:+).format } %>
-      <% callout_boxes << { title: "Budget", content: humanized_money_with_symbol(@project.budget) } %>
-      <% callout_boxes.each do |callout_box| %>
+      <% presenter.callout_boxes.each do |callout_box| %>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0"><%= callout_box[:title] %></h6>
@@ -47,32 +24,14 @@
           </span>
         </li>
       <% end %>
+
       <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <button class='btn btn-block btn-primary btn-outline' href='#' data-toggle="modal" data-target="#itemGroupModal">
-          Add Room
-        </button>
-        <div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel" aria-hidden="true">
-          <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: @project) } %>
-        </div>
+        <%= render partial: 'projects/add_item_group', locals: { project: @project } %>
       </li>
     </ul>
   </div>
+
   <div class="col-md-8">
-    <h3 class="d-flex justify-content-between align-items-center mb-3">
-      <span class="badge badge-secondary badge-pill"><%= @project.item_groups.size %> room(s)</span>
-    </h3>
-    <table class='table table-sm'>
-      <thead>
-      </thead>
-      <tbody>
-        <% @project.item_groups.order(name: :asc).each do |item_group| %>
-          <% total_spent = item_group.total_spent %>
-          <% total_spent_presented = "(#{total_spent.format} / #{humanized_money_with_symbol(item_group.budget)})" %>
-          <tr>
-            <td> <%=link_to "#{item_group.name} #{total_spent_presented}", [@project, item_group] %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render partial: 'projects/item_groups', locals: { item_groups: @project.item_groups.order(name: :asc) } %>
   </div>
 </div>

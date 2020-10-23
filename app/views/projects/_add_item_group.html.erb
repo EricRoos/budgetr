@@ -1,0 +1,6 @@
+<button class='btn btn-block btn-primary btn-outline' href='#' data-toggle="modal" data-target="#itemGroupModal">
+  Add Room
+</button>
+<div class="modal fade" id="itemGroupModal" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel" aria-hidden="true">
+  <%= render partial: 'item_groups/modal_form', locals: { item_group: ItemGroup.new(project: project) } %>
+</div>

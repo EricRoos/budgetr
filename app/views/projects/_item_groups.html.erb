@@ -1,0 +1,19 @@
+<% presenter = Projects::Show.new(project: @project) %>
+<h3 class="d-flex justify-content-between align-items-center mb-3">
+  <span class="badge badge-secondary badge-pill">
+    <%= presenter.room_count %>
+  </span>
+</h3>
+<table class='table table-sm'>
+  <thead>
+  </thead>
+  <tbody>
+    <% item_groups.each do |item_group| %>
+      <% total_spent = item_group.total_spent %>
+      <% total_spent_presented = "(#{total_spent.format} / #{humanized_money_with_symbol(item_group.budget)})" %>
+      <tr>
+        <td><%= link_to "#{item_group.name} #{total_spent_presented}", [@project, item_group] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
