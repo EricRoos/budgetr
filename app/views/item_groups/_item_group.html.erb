@@ -1,10 +1,30 @@
+<% presenter = ItemGroups::ItemGroup.new(item_group: item_group) %>
 <div class='row'>
   <div class="col-md-4">
     <h3 class="d-flex justify-content-between align-items-center mb-3">
       <span class="text-muted"><%= item_group.name %></span>
-      <span class="badge badge-secondary badge-pill"><%= item_group.items.size %> item(s)</span>
+      <span class="badge badge-secondary badge-pill">
+        <%= presenter.item_count %>
+      </span>
     </h3>
+
     <ul class="list-group mb-3">
+      <% presenter.metrics.each do |metric| %>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">
+              <%= metric[:name] %>
+            </h6>
+            <small class="text-muted">
+              <%= metric[:help_text] %>
+            </small>
+          </div>
+          <span class="text-muted">
+            <%= metric[:value] %>
+          </span>
+        </li>
+      <% end %>
+
       <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
           <h6 class="my-0">Total Budget</h6>
@@ -12,6 +32,7 @@
         </div>
         <span class="text-muted"><%= humanized_money_with_symbol(item_group.budget) %></span>
       </li>
+
       <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
           <h6 class="my-0">Total allocated</h6>
@@ -19,6 +40,7 @@
         </div>
         <span class="text-muted"><%= item_group.total_allocated.format %></span>
       </li>
+
       <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
           <h6 class="my-0">Total Spent</h6>
@@ -26,6 +48,8 @@
         </div>
         <span class="text-muted"><%= item_group.total_spent.format %></span>
       </li>
+
+
       <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div class='w-100'>
           <button class='btn btn-sm btn-block btn-primary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
