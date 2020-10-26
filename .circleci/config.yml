@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Prepare Bundler
-          command: gem install bundler 2.1.4
+          command: gem install bundler -v 2.1.4
       - run:
           name: Bundle install
           command: bundle install
