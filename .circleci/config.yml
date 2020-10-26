@@ -22,6 +22,9 @@ jobs:
           name: Bundle install
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - run:
+          name: Yarn Install
+          command: yarn install
+      - run:
           name: Prep DB
           command: bundle exec rake db:create && bundle exec rake db:migrate
       - run:
