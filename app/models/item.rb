@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   monetize :purchase_price_cents, allow_nil: true
   has_rich_text :note
 
+  validates_numericality_of :quantity, greater_than_or_equal_to: 0
+
   def total_price
     return Money.new(0) unless purchase_price_cents.present?
     purchase_price * quantity 
