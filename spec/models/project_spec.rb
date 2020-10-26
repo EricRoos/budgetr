@@ -7,7 +7,7 @@ RSpec.describe Project, type: :model do
     let(:purchase_price_cents) { 200 }
     let(:quantity) { 2 }
     before do
-      item_group = project.item_groups.create(name: :foo)
+      item_group = project.item_groups.create(name: :foo, budget: 1000)
       item_group.items.create(name: :foo, purchase_price_cents: purchase_price_cents, quantity: quantity)
     end
     subject { project.budget_remaining }

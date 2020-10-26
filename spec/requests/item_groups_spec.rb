@@ -15,33 +15,21 @@
 RSpec.describe "/item_groups", type: :request do
   # ItemGroup. As you add validations to ItemGroup, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:project) { Project.create(name: 'foo') }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:valid_attributes) {{
+    name: 'name',
+    budget: 1000,
+    project_id: project.id
+  }}
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      ItemGroup.create! valid_attributes
-      get item_groups_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      item_group = ItemGroup.create! valid_attributes
-      get item_group_url(item_group)
-      expect(response).to be_successful
-    end
-  end
+  let(:invalid_attributes) {{
+    budget: -1000
+  }}
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_item_group_url
+      get new_project_item_group_url(project)
       expect(response).to be_successful
     end
   end
@@ -49,7 +37,7 @@ RSpec.describe "/item_groups", type: :request do
   describe "GET /edit" do
     it "render a successful response" do
       item_group = ItemGroup.create! valid_attributes
-      get edit_item_group_url(item_group)
+      get edit_project_item_group_url(project, item_group)
       expect(response).to be_successful
     end
   end
@@ -58,55 +46,38 @@ RSpec.describe "/item_groups", type: :request do
     context "with valid parameters" do
       it "creates a new ItemGroup" do
         expect {
-          post item_groups_url, params: { item_group: valid_attributes }
+          post project_item_groups_url(project), params: { item_group: valid_attributes }
         }.to change(ItemGroup, :count).by(1)
-      end
-
-      it "redirects to the created item_group" do
-        post item_groups_url, params: { item_group: valid_attributes }
-        expect(response).to redirect_to(item_group_url(ItemGroup.last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new ItemGroup" do
         expect {
-          post item_groups_url, params: { item_group: invalid_attributes }
+          post project_item_groups_url(project), params: { item_group: invalid_attributes }
         }.to change(ItemGroup, :count).by(0)
-      end
-
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post item_groups_url, params: { item_group: invalid_attributes }
-        expect(response).to be_successful
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        name: 'updated'
+      }}
 
       it "updates the requested item_group" do
         item_group = ItemGroup.create! valid_attributes
-        patch item_group_url(item_group), params: { item_group: new_attributes }
+        patch project_item_group_url(project, item_group), params: { item_group: new_attributes }
         item_group.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the item_group" do
-        item_group = ItemGroup.create! valid_attributes
-        patch item_group_url(item_group), params: { item_group: new_attributes }
-        item_group.reload
-        expect(response).to redirect_to(item_group_url(item_group))
+        expect(item_group.name).to eq('updated')
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         item_group = ItemGroup.create! valid_attributes
-        patch item_group_url(item_group), params: { item_group: invalid_attributes }
+        patch project_item_group_url(project, item_group), params: { item_group: invalid_attributes }
         expect(response).to be_successful
       end
     end
@@ -116,14 +87,8 @@ RSpec.describe "/item_groups", type: :request do
     it "destroys the requested item_group" do
       item_group = ItemGroup.create! valid_attributes
       expect {
-        delete item_group_url(item_group)
+        delete project_item_group_url(project, item_group)
       }.to change(ItemGroup, :count).by(-1)
-    end
-
-    it "redirects to the item_groups list" do
-      item_group = ItemGroup.create! valid_attributes
-      delete item_group_url(item_group)
-      expect(response).to redirect_to(item_groups_url)
     end
   end
 end

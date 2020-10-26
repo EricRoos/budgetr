@@ -75,6 +75,10 @@ GEM
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     dalli (2.7.10)
+    database_cleaner (1.8.5)
+    database_cleaner-active_record (1.8.0)
+      activerecord
+      database_cleaner (~> 1.8.0)
     diff-lcs (1.4.4)
     erubi (1.9.0)
     faraday (1.0.1)
@@ -249,6 +253,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   dalli
+  database_cleaner-active_record
   graphiql-rails
   graphql
   jbuilder (~> 2.7)

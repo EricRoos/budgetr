@@ -13,8 +13,8 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/items", type: :request do
-  let(:project) { Project.create }
-  let(:item_group ) { ItemGroup.create(project: project) }
+  let(:project) { Project.create! }
+  let(:item_group ) { ItemGroup.create!(project: project, budget: 100) }
 
   let(:valid_attributes) {
     {
