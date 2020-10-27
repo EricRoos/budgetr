@@ -1,7 +1,10 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
-SimpleCov.minimum_coverage 85
-SimpleCov.start
+#SimpleCov.minimum_coverage 85
+SimpleCov.start 'rails' do
+  add_filter %r{^/app/graphql/}
+  add_filter %r{^/app/channels/}
+end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
