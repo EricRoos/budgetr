@@ -3,12 +3,12 @@ orbs:
   ruby: circleci/ruby@0.1.2 
 workflows:
   version: 2
-    test_and_build:
-      jobs:
-        - test
-        - deploy 
-          requires:
-            - test
+  test_and_build:
+    jobs:
+      - test
+      - deploy 
+        requires:
+          - test
 jobs:
   deploy:
     steps:
