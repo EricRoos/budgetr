@@ -33,5 +33,5 @@ jobs:
           command: bundle exec rspec
       - run:
           name: Make Image
-          command: make build
+          command: make circleci_deploy_pipeline
 
