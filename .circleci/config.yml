@@ -7,8 +7,8 @@ workflows:
     jobs:
       - test
       - deploy:
-        requires:
-          - test
+          requires:
+            - test
 jobs:
   deploy:
     machine:
