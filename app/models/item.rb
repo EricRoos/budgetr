@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   has_paper_trail
   belongs_to :item_group, touch: true
@@ -8,6 +10,7 @@ class Item < ApplicationRecord
 
   def total_price
     return Money.new(0) unless purchase_price_cents.present?
-    purchase_price * quantity 
+
+    purchase_price * quantity
   end
 end

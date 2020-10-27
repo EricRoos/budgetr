@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDefaultToPurchasedForItems < ActiveRecord::Migration[6.0]
   def up
     change_column_default :items, :purchased, false

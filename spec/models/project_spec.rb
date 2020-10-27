@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
@@ -14,9 +16,9 @@ RSpec.describe Project, type: :model do
     it { is_expected.to eq 996 }
 
     context 'when purchase price is more than the budget' do
-      let(:purchase_price_cents) { 100100 }
+      let(:purchase_price_cents) { 100_100 }
       let(:quantity) { 1 }
-      it { is_expected.to eq -1 }
+      it { is_expected.to eq(-1) }
     end
   end
 end

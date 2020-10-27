@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ItemGroupsController < ApplicationController
   before_action :set_project
-  before_action :set_item_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_item_group, only: %i[show edit update destroy]
 
   # GET /item_groups
   # GET /item_groups.json
@@ -10,8 +12,7 @@ class ItemGroupsController < ApplicationController
 
   # GET /item_groups/1
   # GET /item_groups/1.json
-  def show
-  end
+  def show; end
 
   # GET /item_groups/new
   def new
@@ -19,8 +20,7 @@ class ItemGroupsController < ApplicationController
   end
 
   # GET /item_groups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /item_groups
   # POST /item_groups.json
@@ -64,16 +64,18 @@ class ItemGroupsController < ApplicationController
   end
 
   private
-    def set_project
-      @project = Project.find(params[:project_id])
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item_group
-      @item_group = ItemGroup.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def item_group_params
-      params.require(:item_group).permit(:project_id, :name, :budget, :note)
-    end
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item_group
+    @item_group = ItemGroup.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def item_group_params
+    params.require(:item_group).permit(:project_id, :name, :budget, :note)
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VersionsController < ApplicationController
   def restore
     PaperTrail::Version.find(params[:id]).reify.save

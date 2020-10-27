@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Project < ApplicationRecord
   has_paper_trail
   has_many :item_groups
   has_many :items, through: :item_groups
 
   def budget_remaining
-    item_price_sum = items.map { |i|
+    item_price_sum = items.map do |i|
       if i.purchase_price_cents && i.quantity
         i.purchase_price_cents * i.quantity
       elsif i.purchase_price_cents && !i.quantity.present?
@@ -12,8 +14,8 @@ class Project < ApplicationRecord
       else
         0
       end
-    }.sum
-    @budget_remaining ||= (( budget || 0 )- (item_price_sum / 100))
+    end.sum
+    @budget_remaining ||= ((budget || 0) - (item_price_sum / 100))
   end
 
   def allocated_budget

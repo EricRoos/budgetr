@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   class Show < BasePresenter
     attr_accessor :project
@@ -8,9 +10,9 @@ module Projects
 
     def callout_boxes
       [
-        { title: "Total Spent", content: total_spent },
-        { title: "Total Allocated", content: total_allocated },
-        { title: "Budget", content: budget }
+        { title: 'Total Spent', content: total_spent },
+        { title: 'Total Allocated', content: total_allocated },
+        { title: 'Budget', content: budget }
       ]
     end
 
@@ -28,8 +30,9 @@ module Projects
 
     def room_count
       count = project.item_groups.size
-      return "No rooms" if count == 0
-      "#{count} room#{count > 1 ? "s" : ""}"
+      return 'No rooms' if count.zero?
+
+      "#{count} room#{count > 1 ? 's' : ''}"
     end
   end
 end

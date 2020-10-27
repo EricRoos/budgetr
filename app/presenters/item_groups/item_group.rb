@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ItemGroups
   class ItemGroup < BasePresenter
     attr_accessor :item_group

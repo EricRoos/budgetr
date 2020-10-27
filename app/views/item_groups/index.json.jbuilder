@@ -1,1 +1,3 @@
-json.array! @item_groups, partial: "item_groups/item_group", as: :item_group
+# frozen_string_literal: true
+
+json.array! @item_groups, partial: 'item_groups/item_group', as: :item_group
