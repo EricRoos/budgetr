@@ -15,7 +15,6 @@ jobs:
       image: ubuntu-2004:202010-01
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Dockerhub Login
           command: echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
