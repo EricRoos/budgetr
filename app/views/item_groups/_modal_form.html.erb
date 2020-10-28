@@ -10,7 +10,7 @@
         <%= form_with(model: [item_group.project,item_group ], local: true) do |form| %>
           <% project = item_group.project %>
           <%= render partial: 'item_groups/fields', locals: { form: form, budget_remaining: (project.budget - project.allocated_budget)  } %>
-          <%= form.submit class: 'btn btn-primary' %>
+          <%= form.submit value: 'Create Room', class: 'btn btn-primary' %>
         <% end %>
       </div>
       <div class="modal-footer">
