@@ -41,9 +41,18 @@ jobs:
       - run:
           name: Prepare Bundler
           command: gem install bundler -v 2.1.4
+      - restore_cache:
+        keys:
+          - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          - gem-cache-v1-{{ arch }}-{{ .Branch }}
+          - gem-cache-v1
       - run:
           name: Bundle install
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run:
           name: Yarn Install
           command: yarn install
