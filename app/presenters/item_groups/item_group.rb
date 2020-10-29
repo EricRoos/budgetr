@@ -15,7 +15,7 @@ module ItemGroups
 
     def metrics
       [
-        { name: 'Total Budget', help_text: 'Total amount to spend on this room', value: total_budget }
+        { name: 'Total Budget', help_text: 'Total amount to spend on this room', value: total_budget },
       ]
     end
 

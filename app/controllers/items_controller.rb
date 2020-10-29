@@ -3,7 +3,7 @@
 class ItemsController < ApplicationController
   before_action :set_project
   before_action :set_item_group
-  before_action :set_item, only: %i[show edit update destroy]
+  before_action :set_item, only: %i(show edit update destroy)
 
   # GET /items
   # GET /items.json

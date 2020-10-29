@@ -7,9 +7,10 @@ RSpec.describe ItemsController, type: :routing do
     {
       controller: 'items',
       project_id: '1',
-      item_group_id: '1'
+      item_group_id: '1',
     }
   end
+
   describe 'routing' do
     it 'routes to #index' do
       expect(get: 'projects/1/item_groups/1/items').to route_to(base_route_expect.merge(action: 'index'))

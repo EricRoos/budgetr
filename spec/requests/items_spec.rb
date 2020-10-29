@@ -23,7 +23,7 @@ RSpec.describe '/items', type: :request do
       name: 'foo',
       quantity: 1,
       purchase_price: '1.99',
-      item_group_id: item_group.id
+      item_group_id: item_group.id,
     }
   end
 
@@ -84,7 +84,7 @@ RSpec.describe '/items', type: :request do
     context 'with valid parameters' do
       let(:new_attributes) do
         {
-          name: 'updated'
+          name: 'updated',
         }
       end
 

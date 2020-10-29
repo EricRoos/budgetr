@@ -23,13 +23,13 @@ RSpec.describe '/item_groups', type: :request do
     {
       name: 'name',
       budget: 1000,
-      project_id: project.id
+      project_id: project.id,
     }
   end
 
   let(:invalid_attributes) do
     {
-      budget: -1000
+      budget: -1000,
     }
   end
 
@@ -70,7 +70,7 @@ RSpec.describe '/item_groups', type: :request do
     context 'with valid parameters' do
       let(:new_attributes) do
         {
-          name: 'updated'
+          name: 'updated',
         }
       end
 

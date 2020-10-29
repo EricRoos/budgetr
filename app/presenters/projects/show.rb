@@ -12,7 +12,7 @@ module Projects
       [
         { title: 'Total Spent', content: total_spent },
         { title: 'Total Allocated', content: total_allocated },
-        { title: 'Budget', content: budget }
+        { title: 'Budget', content: budget },
       ]
     end
 

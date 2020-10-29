@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[edit update destroy]
+  before_action :set_project, only: %i(edit update destroy)
 
   # GET /projects
   # GET /projects.json

@@ -6,7 +6,7 @@ RSpec.describe ItemGroupsController, type: :routing do
   let(:base_route_expect) do
     {
       controller: 'item_groups',
-      project_id: '1'
+      project_id: '1',
     }
   end
   let(:base_route) { '/projects/1/item_groups' }

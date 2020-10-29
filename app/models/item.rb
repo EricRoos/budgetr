@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates_numericality_of :quantity, greater_than_or_equal_to: 0
 
   def total_price
-    return Money.new(0) unless purchase_price_cents.present?
+    return Money.new(0) if purchase_price_cents.blank?
 
     purchase_price * quantity
   end
