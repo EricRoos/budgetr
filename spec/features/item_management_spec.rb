@@ -10,7 +10,7 @@ RSpec.feature 'Item Management', type: :feature do
     visit project_item_group_path(project, item_group)
     click_button 'Add Item'
     sleep 1
-    fill_in 'Name', with: 'My Room'
+    fill_in 'Name', with: 'Name'
     fill_in 'Quantity', with: 10
     fill_in 'Price', with: '1.99'
     click_button 'Create Item'
