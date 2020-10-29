@@ -43,7 +43,9 @@ class ItemGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @item_group.update(item_group_params)
-        format.html { redirect_to project_path(@project, shownItemGroup: @item_group.id), notice: 'Item group was successfully updated.' }
+        format.html do
+          redirect_to project_path(@project, shownItemGroup: @item_group.id), notice: 'Item group was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @item_group }
       else
         format.html { render :edit }

@@ -12,3 +12,7 @@ AllCops:
     - 'lib/tasks/*'
     - 'vendor/**/*'
     - 'path/ruby'
+    - 'node_modules/**/*'
+
+Metrics/LineLength:
+  Max: 130
