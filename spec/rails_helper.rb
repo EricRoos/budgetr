@@ -10,8 +10,9 @@ end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
+require 'capybara/rails'
 require 'capybara/apparition'
-# Capybara.javascript_driver = :selenium_chrome
+#Capybara.javascript_driver = :selenium_headless
 #
 Capybara.javascript_driver = :apparition
 # Prevent database truncation if the environment is production

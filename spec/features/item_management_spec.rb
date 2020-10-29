@@ -6,9 +6,10 @@ RSpec.feature 'Item Management', type: :feature do
   let(:project) { Project.create(name: 'Foo', budget: 1000) }
   let(:item_group) { ItemGroup.create(project: project, budget: 1000, name: 'foo group') }
 
-  scenario 'User creates a new item' do
+  scenario 'User creates a new item', js: true do
     visit project_item_group_path(project, item_group)
     click_button 'Add Item'
+    sleep 1
     fill_in 'Name', with: 'My Room'
     fill_in 'Quantity', with: 10
     fill_in 'Price', with: '1.99'

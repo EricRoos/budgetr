@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html {
-          redirect_to project_path(@project, notice: 'Item was successfully created.')
+          redirect_to project_item_group_path(@project, @item.item_group), notice: 'Item was successfully created.'
         }
         format.js
         format.json { render :show, status: :created, location: @item }

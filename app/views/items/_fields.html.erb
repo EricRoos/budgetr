@@ -1,6 +1,6 @@
 <% id_prefix = "item_#{form.object.id}_" %>
 <div class="field">
-  <%= form.label :name %>
+  <%= form.label :name, for: "#{id_prefix}name" %>
   <%= form.text_field :name, autofocus: true, id: "#{id_prefix}name" %>
 </div>
 
