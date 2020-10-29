@@ -20,5 +20,10 @@ RSpec.describe Project, type: :model do
       let(:quantity) { 1 }
       it { is_expected.to eq(-1) }
     end
+
+    context 'purchase_price is nil' do
+      let(:purchase_price_cents) { nil }
+      it { is_expected.to eq budget }
+    end
   end
 end

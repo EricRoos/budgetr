@@ -16,12 +16,12 @@
         </div>
 
         <div class="field">
-          <%= form.label :quantity %>
+          <%= form.label :quantity, for: "#{id_prefix}qty" %>
           <%= form.number_field :quantity, id: "#{id_prefix}qty" %>
         </div>
 
         <div class="field">
-          <%= form.label "Price" %>
+          <%= form.label "Price", for: "#{id_prefix}price" %>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>

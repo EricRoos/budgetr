@@ -8,10 +8,9 @@ class Project < ApplicationRecord
 
   def budget_remaining
     item_price_sum = items.map do |i|
-      if i.purchase_price_cents && i.quantity
-        i.purchase_price_cents * i.quantity
-      elsif i.purchase_price_cents && !i.quantity.present?
-        i.purchase_price
+      quantity = i.quantity || 1
+      if i.purchase_price_cents
+        i.purchase_price_cents * quantity
       else
         0
       end

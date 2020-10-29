@@ -15,11 +15,15 @@ RSpec.feature 'Item Groupmanagement', type: :feature do
   end
 
   scenario 'delete an item group', js: true do
-    item_group = ItemGroup.create(project: project, budget: 100)
+    item_group = ItemGroup.create(project: project, budget: 100, name: 'My Room')
     visit project_item_group_path(project, item_group)
     page.accept_confirm do
       click_link 'Delete Room'
     end
     expect(page).to have_content('Item group was successfully destroyed.')
+    expect(page).to have_content('No rooms')
+    click_button 'Restore'
+    expect(page).to have_content('1 room')
+    expect(page).to have_content('My Room')
   end
 end
