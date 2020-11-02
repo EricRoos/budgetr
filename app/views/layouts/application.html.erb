@@ -16,9 +16,11 @@
     <nav class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Budgetr</a>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'text-white' %>
-        </li>
+        <% if current_user %>
+          <li class="nav-item">
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'text-white' %>
+          </li>
+        <% end %>
       </ul>
     </nav>
     <div class='container pt-2 h-100'>
@@ -33,11 +35,14 @@
           <%= button_to 'Restore', restore_version_path(id: @restorable), class: 'btn btn-primary btn-sm' %>
         </div> 
       <% end %>
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <%= yield :breadcrumbs %>
-        </ol>
-      </nav>
+      <% breads = yield :breadcrumbs %>
+      <% if breads.present? %>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <%= breads %>
+          </ol>
+        </nav>
+      <% end %>
       <main class='bg-white p-3 rounded'>
         <%= yield %>
       </main>
