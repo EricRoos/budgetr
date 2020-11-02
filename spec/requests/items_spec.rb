@@ -91,6 +91,14 @@ RSpec.describe '/items', type: :request do
         end.to change(Item, :count).by(0)
       end
     end
+    context 'when not logged in as project owner' do
+      let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+      it 'does not create a new Item' do
+        expect do
+          post project_item_group_items_url(project, item_group), params: { item: valid_attributes }
+        end.to change(Item, :count).by(0)
+      end
+    end
   end
 
   describe 'PATCH /update' do
@@ -116,6 +124,16 @@ RSpec.describe '/items', type: :request do
         expect(response).to be_successful
       end
     end
+    context 'when not logged in as project owner' do
+      let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+      it 'does not update the item' do
+        item = Item.create! valid_attributes
+        expect do
+          patch project_item_group_item_url(project, item_group, item), params: { item: valid_attributes }
+        end.to_not change { item.reload.as_json }
+        expect(response).to_not be_successful
+      end
+    end
   end
 
   describe 'DELETE /destroy' do
@@ -124,6 +142,15 @@ RSpec.describe '/items', type: :request do
       expect do
         delete project_item_group_item_url(project, item_group, item)
       end.to change(Item, :count).by(-1)
+    end
+    context 'when not logged in as project owner' do
+      let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+      it 'does not destroy the item' do
+        item = Item.create! valid_attributes
+        expect do
+          delete project_item_group_item_url(project, item_group, item)
+        end.to change(Item, :count).by(0)
+      end
     end
   end
 end

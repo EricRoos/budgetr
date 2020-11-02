@@ -32,7 +32,7 @@ RSpec.describe '/projects', type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) do
     {
-      name: 'Foo',
+      name: 'Valid Attributes',
       budget: 1500
     }
   end
@@ -122,9 +122,22 @@ RSpec.describe '/projects', type: :request do
       it 'redirects to the project' do
         project = Project.create! valid_attributes
         current_user.add_project(project)
-        patch project_url(project), params: { project: new_attributes }
-        project.reload
+        expect do
+          patch project_url(project), params: { project: new_attributes }
+        end.to change{ project.reload.as_json }
         expect(response).to redirect_to(project_url(project))
+      end
+
+      context 'when not logged in as project owner' do
+        let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+
+        it 'does not update the project' do
+          project = Project.create! valid_attributes
+          project_owner.add_project(project)
+          expect do
+            patch project_url(project), params: { project: new_attributes }
+          end.to_not change{ project.reload.as_json }
+        end
       end
     end
 
@@ -141,7 +154,7 @@ RSpec.describe '/projects', type: :request do
   describe 'DELETE /destroy' do
     it 'destroys the requested project' do
       project = Project.create! valid_attributes
-      current_user.add_project(project)
+      project_owner.add_project(project)
       expect do
         delete project_url(project)
       end.to change(Project, :count).by(-1)
@@ -149,9 +162,21 @@ RSpec.describe '/projects', type: :request do
 
     it 'redirects to the projects list' do
       project = Project.create! valid_attributes
-      current_user.add_project(project)
+      project_owner.add_project(project)
       delete project_url(project)
       expect(response).to redirect_to(projects_url)
+    end
+
+    context 'when not logged in as project owner' do
+      let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+
+      it 'does not delete the project' do
+        project = Project.create! valid_attributes
+        project_owner.add_project(project)
+        expect do
+          delete project_url(project)
+        end.to change(Project, :count).by(0)
+      end
     end
   end
 end

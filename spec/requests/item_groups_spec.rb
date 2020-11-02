@@ -77,6 +77,14 @@ RSpec.describe '/item_groups', type: :request do
         end.to change(ItemGroup, :count).by(0)
       end
     end
+    context 'when not logged in as project owner' do
+      let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+      it 'does not create a new ItemGroup' do
+        expect do
+          post project_item_groups_url(project), params: { item_group: valid_attributes }
+        end.to change(ItemGroup, :count).by(0)
+      end
+    end
   end
 
   describe 'PATCH /update' do
@@ -86,7 +94,6 @@ RSpec.describe '/item_groups', type: :request do
           name: 'updated',
         }
       end
-
       it 'updates the requested item_group' do
         item_group = ItemGroup.create! valid_attributes
         patch project_item_group_url(project, item_group), params: { item_group: new_attributes }

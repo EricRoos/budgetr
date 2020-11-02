@@ -9,7 +9,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    owns_project?
   end
 
   def new?
