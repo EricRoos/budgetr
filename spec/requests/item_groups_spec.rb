@@ -88,12 +88,12 @@ RSpec.describe '/item_groups', type: :request do
   end
 
   describe 'PATCH /update' do
+    let(:new_attributes) do
+      {
+        name: 'updated',
+      }
+    end
     context 'with valid parameters' do
-      let(:new_attributes) do
-        {
-          name: 'updated',
-        }
-      end
       it 'updates the requested item_group' do
         item_group = ItemGroup.create! valid_attributes
         patch project_item_group_url(project, item_group), params: { item_group: new_attributes }
@@ -107,6 +107,15 @@ RSpec.describe '/item_groups', type: :request do
         item_group = ItemGroup.create! valid_attributes
         patch project_item_group_url(project, item_group), params: { item_group: invalid_attributes }
         expect(response).to be_successful
+      end
+    end
+    context 'when not logged in as project owner' do
+      let(:project_owner) { User.create(email: 'other@test.com', password: 'test1234556') }
+      it 'does not update the requested item_group' do
+        item_group = ItemGroup.create! valid_attributes
+        expect do
+          patch project_item_group_url(project, item_group), params: { item_group: new_attributes }
+        end.to_not change { item_group.reload.as_json }
       end
     end
   end
