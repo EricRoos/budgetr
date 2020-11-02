@@ -25,7 +25,7 @@ module Projects
     end
 
     def budget
-      Money.new(project.budget || 0).format
+      Money.new(100*(project.budget || 0)).format
     end
 
     def room_count

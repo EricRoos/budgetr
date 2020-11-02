@@ -21,4 +21,14 @@ RSpec.feature 'Project management', type: :feature do
     expect(page).to have_content('error')
     expect(page).to have_content('Budget must be greater than or equal to 0')
   end
+
+  scenario 'updating a project' do
+    project = Project.create(budget: 1000, name: 'foo')
+    visit edit_project_path(project)
+    fill_in 'Budget', with: 1500
+    click_on 'Update Project'
+    expect(page).to have_content('Project was successfully updated.')
+    expect(page).to have_content('$1,500')
+
+  end
 end
