@@ -1,7 +1,7 @@
 class ProjectPolicy < ApplicationPolicy
 
   def index?
-    true
+    owns_project?
   end
 
   def show?
