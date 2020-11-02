@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root to: 'projects#index'
   resources :projects do
     resources :item_groups do
-      resources :items
+      resources :items, except: [ :index ]
     end
   end
 

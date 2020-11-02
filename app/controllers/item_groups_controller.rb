@@ -7,7 +7,7 @@ class ItemGroupsController < ApplicationController
   # GET /item_groups
   # GET /item_groups.json
   def index
-    @item_groups = ItemGroup.all
+    @item_groups = @project.item_groups
   end
 
   # GET /item_groups/1

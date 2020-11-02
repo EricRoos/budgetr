@@ -12,9 +12,9 @@ RSpec.describe ItemsController, type: :routing do
   end
 
   describe 'routing' do
-    it 'routes to #index' do
-      expect(get: 'projects/1/item_groups/1/items').to route_to(base_route_expect.merge(action: 'index'))
-    end
+    #it 'routes to #index' do
+    #  expect(get: 'projects/1/item_groups/1/items').to route_to(base_route_expect.merge(action: 'index'))
+    #end
 
     it 'routes to #new' do
       expect(get: 'projects/1/item_groups/1/items/new').to route_to(base_route_expect.merge(action: 'new'))
