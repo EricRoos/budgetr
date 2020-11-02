@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
   before_action :check_for_restorable
+
 
   def check_for_restorable
     return if session[:restorable_id].blank?

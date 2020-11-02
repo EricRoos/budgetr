@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'lograge'
 gem 'money-rails'
 gem 'paper_trail'
+gem 'devise'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
