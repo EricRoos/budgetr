@@ -3,14 +3,22 @@
 require 'rails_helper'
 
 RSpec.feature 'Item Management', type: :feature do
-  let(:project) { Project.create(name: 'Foo', budget: 1000) }
   let(:item_group) { ItemGroup.create(project: project, budget: 1000, name: 'foo group') }
-
-  before do
+  let(:current_user) {
     email = 'foo@test.com'
     password = 'test123456'
-    user = User.create(email: email, password: password)
-    sign_in user
+    User.create(email: email, password: password)
+  }
+  let(:project_owner) { current_user }
+
+  let(:project) do
+    project = Project.new(name: 'foo', budget: 1000)
+    project_owner.add_project(project)
+    project
+  end
+
+  before do
+    sign_in current_user
   end
 
   scenario 'User creates a new item', js: true do

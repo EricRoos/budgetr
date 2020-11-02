@@ -6,6 +6,9 @@ class Project < ApplicationRecord
   has_many :items, through: :item_groups
   validates_numericality_of :budget, greater_than_or_equal_to: 0
 
+  has_many :user_projects, dependent: :destroy
+  has_many :users, through: :user_projects
+
   def budget_remaining
     item_price_sum = items.map do |i|
       quantity = i.quantity || 1

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :set_project
+  before_action :set_and_authorize_project
   before_action :set_item_group
   before_action :set_item, only: %i(show edit update destroy)
 
@@ -75,8 +75,9 @@ class ItemsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_project
+  def set_and_authorize_project
     @project = Project.find(params[:project_id])
+    authorize @project
   end
 
   def set_item_group

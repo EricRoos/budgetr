@@ -3,7 +3,7 @@
 class ItemGroup < ApplicationRecord
   has_paper_trail
   belongs_to :project, touch: true
-  has_many :items, dependent: :delete_all
+  has_many :items, dependent: :destroy
   has_rich_text :note
 
   validates_numericality_of :budget, greater_than_or_equal_to: 0

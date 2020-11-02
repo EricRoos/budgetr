@@ -3,11 +3,22 @@
 require 'rails_helper'
 
 RSpec.feature 'Project management', type: :feature do
-  before do
+
+  let(:current_user) {
     email = 'foo@test.com'
     password = 'test123456'
-    user = User.create(email: email, password: password)
-    sign_in user
+    User.create(email: email, password: password)
+  }
+  let(:project_owner) { current_user }
+
+  let(:project) do
+    project = Project.new(name: 'foo', budget: 1000)
+    project_owner.add_project(project)
+    project
+  end
+
+  before do
+    sign_in current_user
   end
 
   scenario 'User creates a new project' do
@@ -30,7 +41,6 @@ RSpec.feature 'Project management', type: :feature do
   end
 
   scenario 'updating a project' do
-    project = Project.create(budget: 1000, name: 'foo')
     visit edit_project_path(project)
     fill_in 'Budget', with: 1500
     click_on 'Update Project'

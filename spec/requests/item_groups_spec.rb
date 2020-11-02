@@ -15,15 +15,22 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/item_groups', type: :request do
-  before do
+  let(:current_user) {
     email = 'foo@test.com'
     password = 'test123456'
-    user = User.create(email: email, password: password)
-    sign_in user
+    User.create(email: email, password: password)
+  }
+  let(:project_owner) { current_user }
+  before do
+    sign_in current_user
   end
   # ItemGroup. As you add validations to ItemGroup, be sure to
   # adjust the attributes here as well.
-  let(:project) { Project.create(name: 'foo') }
+  let(:project) do
+    project = Project.new(name: 'foo', budget: 1000)
+    project_owner.add_project(project)
+    project
+  end
 
   let(:valid_attributes) do
     {

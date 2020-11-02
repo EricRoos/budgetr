@@ -15,25 +15,38 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/projects', type: :request do
-  before do
+
+  let(:current_user) do
     email = 'foo@test.com'
     password = 'test123456'
-    user = User.create(email: email, password: password)
-    sign_in user
+    User.create(email: email, password: password)
   end
+
+  let(:project_owner) { current_user }
+
+  before do
+    sign_in current_user
+  end
+
   # Project. As you add validations to Project, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    {
+      name: 'Foo',
+      budget: 1500
+    }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    {
+      name: 'Foo',
+      budget: -1500
+    }
   end
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Project.create! valid_attributes
+      current_user.add_project(Project.new(valid_attributes))
       get projects_url
       expect(response).to be_successful
     end
@@ -41,7 +54,8 @@ RSpec.describe '/projects', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      project = Project.create! valid_attributes
+      project = Project.new(valid_attributes)
+      current_user.add_project(project)
       get project_url(project)
       expect(response).to be_successful
     end
@@ -56,7 +70,8 @@ RSpec.describe '/projects', type: :request do
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      project = Project.create! valid_attributes
+      project = Project.new(valid_attributes)
+      current_user.add_project(project)
       get edit_project_url(project)
       expect(response).to be_successful
     end
@@ -93,18 +108,20 @@ RSpec.describe '/projects', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        { name: 'updated', budget: 1000 }
       end
 
       it 'updates the requested project' do
         project = Project.create! valid_attributes
+        current_user.add_project(project)
         patch project_url(project), params: { project: new_attributes }
         project.reload
-        skip('Add assertions for updated state')
+        expect(response).to redirect_to(project_url(project))
       end
 
       it 'redirects to the project' do
         project = Project.create! valid_attributes
+        current_user.add_project(project)
         patch project_url(project), params: { project: new_attributes }
         project.reload
         expect(response).to redirect_to(project_url(project))
@@ -114,6 +131,7 @@ RSpec.describe '/projects', type: :request do
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         project = Project.create! valid_attributes
+        current_user.add_project(project)
         patch project_url(project), params: { project: invalid_attributes }
         expect(response).to be_successful
       end
@@ -123,6 +141,7 @@ RSpec.describe '/projects', type: :request do
   describe 'DELETE /destroy' do
     it 'destroys the requested project' do
       project = Project.create! valid_attributes
+      current_user.add_project(project)
       expect do
         delete project_url(project)
       end.to change(Project, :count).by(-1)
@@ -130,6 +149,7 @@ RSpec.describe '/projects', type: :request do
 
     it 'redirects to the projects list' do
       project = Project.create! valid_attributes
+      current_user.add_project(project)
       delete project_url(project)
       expect(response).to redirect_to(projects_url)
     end

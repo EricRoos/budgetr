@@ -15,13 +15,20 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/items', type: :request do
-  before do
+  let(:current_user) {
     email = 'foo@test.com'
     password = 'test123456'
-    user = User.create(email: email, password: password)
-    sign_in user
+    User.create(email: email, password: password)
+  }
+  let(:project_owner) { current_user }
+  before do
+    sign_in current_user
   end
-  let(:project) { Project.create! }
+  let(:project) do
+    project = Project.new(name: 'foo', budget: 1000)
+    project_owner.add_project(project)
+    project
+  end
   let(:item_group) { ItemGroup.create!(project: project, budget: 100) }
 
   let(:valid_attributes) do
