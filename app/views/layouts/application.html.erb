@@ -15,6 +15,11 @@
   <body class='bg-dark h-100'>
     <nav class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Budgetr</a>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'text-white' %>
+        </li>
+      </ul>
     </nav>
     <div class='container pt-2 h-100'>
       <% if notice.present? %>

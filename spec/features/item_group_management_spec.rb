@@ -4,6 +4,12 @@ require 'rails_helper'
 
 RSpec.feature 'Item Groupmanagement', type: :feature do
   let(:project) { Project.create(name: 'Foo', budget: 1000) }
+  before do
+    email = 'foo@test.com'
+    password = 'test123456'
+    user = User.create(email: email, password: password)
+    sign_in user
+  end
 
   scenario 'User creates a new item group' do
     visit project_path(project)

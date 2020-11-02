@@ -6,6 +6,13 @@ RSpec.feature 'Item Management', type: :feature do
   let(:project) { Project.create(name: 'Foo', budget: 1000) }
   let(:item_group) { ItemGroup.create(project: project, budget: 1000, name: 'foo group') }
 
+  before do
+    email = 'foo@test.com'
+    password = 'test123456'
+    user = User.create(email: email, password: password)
+    sign_in user
+  end
+
   scenario 'User creates a new item', js: true do
     visit project_item_group_path(project, item_group)
     click_button 'Add Item'

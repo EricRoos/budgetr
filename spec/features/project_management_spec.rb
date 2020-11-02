@@ -3,6 +3,13 @@
 require 'rails_helper'
 
 RSpec.feature 'Project management', type: :feature do
+  before do
+    email = 'foo@test.com'
+    password = 'test123456'
+    user = User.create(email: email, password: password)
+    sign_in user
+  end
+
   scenario 'User creates a new project' do
     visit root_path
     click_link 'New Project'

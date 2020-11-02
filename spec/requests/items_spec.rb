@@ -15,6 +15,12 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/items', type: :request do
+  before do
+    email = 'foo@test.com'
+    password = 'test123456'
+    user = User.create(email: email, password: password)
+    sign_in user
+  end
   let(:project) { Project.create! }
   let(:item_group) { ItemGroup.create!(project: project, budget: 100) }
 
