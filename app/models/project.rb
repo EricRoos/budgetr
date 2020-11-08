@@ -11,6 +11,14 @@ class Project < ApplicationRecord
   has_many :user_projects, dependent: :destroy, autosave: true, inverse_of: :project
   has_many :users, through: :user_projects
 
+  #because papertrail problems and the way I chose to restore things
+  #i have to do this instead of the has_many through.
+  #
+  #AR was giving me the business about the way this relationship was setup
+  def items
+    Item.where(item_group_id: item_groups.collect(&:id))
+  end
+
   def budget_remaining
     item_price_sum = items.map do |i|
       quantity = i.quantity || 1
