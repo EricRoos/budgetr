@@ -28,10 +28,15 @@ class ProjectPolicy < ApplicationPolicy
     owns_project?
   end
 
-  private
+  protected
     def owns_project?
-      UserProject.where(project: record, user: user).exists?
+      UserProject.where(project: project, user: user).exists?
     end
+
+    def project
+      record
+    end
+
   class Scope < Scope
     def resolve
       user.projects.merge(scope)

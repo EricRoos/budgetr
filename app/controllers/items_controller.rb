@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = @item_group.items.build(item_params)
+    authorize @item, policy_class: ProjectEntityPolicy
 
     respond_to do |format|
       if @item.save
@@ -77,7 +78,6 @@ class ItemsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_and_authorize_project
     @project = Project.find(params[:project_id])
-    authorize @project
   end
 
   def set_item_group
@@ -86,6 +86,7 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+    authorize @item, policy_class: ProjectEntityPolicy
   end
 
   # Only allow a list of trusted parameters through.

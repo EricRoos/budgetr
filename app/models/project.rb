@@ -6,6 +6,9 @@ class Project < ApplicationRecord
   has_many :item_groups, dependent: :destroy, autosave: true, inverse_of: :project
 
 
+  has_many :contributors
+  has_many :contributing_users, through: :contributors, source: 'user'
+
   validates_numericality_of :budget, greater_than_or_equal_to: 0
 
   has_many :user_projects, dependent: :destroy, autosave: true, inverse_of: :project
