@@ -2,7 +2,6 @@ class ContributorsController < ApplicationController
   before_action :set_and_authorize_project
   before_action :set_contributor, only: [:show, :edit, :update, :destroy]
 
-
   # GET /contributors/new
   def new
     @contributor = @project.contributors.build
@@ -12,7 +11,7 @@ class ContributorsController < ApplicationController
   # POST /contributors
   # POST /contributors.json
   def create
-    @contributor = @project.contributors.build({user: User.where(email: params[:contributor][:user][:email]).first})
+    @contributor = @project.contributors.build({ user: User.where(email: params[:contributor][:user][:email]).first })
     authorize @contributor
 
     respond_to do |format|
@@ -26,7 +25,6 @@ class ContributorsController < ApplicationController
     end
   end
 
-
   # DELETE /contributors/1
   # DELETE /contributors/1.json
   def destroy
@@ -38,20 +36,21 @@ class ContributorsController < ApplicationController
   end
 
   private
-    def set_and_authorize_project
-      @project = Project.where(id: params[:project_id]).first
-      head :not_found unless @project.present?
-      @project
-    end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contributor
-      @contributor = Contributor.find(params[:id])
-      authorize @contributor
-    end
+  def set_and_authorize_project
+    @project = Project.where(id: params[:project_id]).first
+    head :not_found if @project.blank?
+    @project
+  end
 
-    # Only allow a list of trusted parameters through.
-    def contributor_params
-      params.require(:contributor).permit(:user_id, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contributor
+    @contributor = Contributor.find(params[:id])
+    authorize @contributor
+  end
+
+  # Only allow a list of trusted parameters through.
+  def contributor_params
+    params.require(:contributor).permit(:user_id, :project_id)
+  end
 end

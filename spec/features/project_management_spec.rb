@@ -3,12 +3,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Project management', type: :feature do
-
-  let(:current_user) {
+  let(:current_user) do
     email = 'foo@test.com'
     password = 'test123456'
     User.create(email: email, password: password)
-  }
+  end
   let(:project_owner) { current_user }
 
   let(:project) do
@@ -46,6 +45,5 @@ RSpec.feature 'Project management', type: :feature do
     click_on 'Update Project'
     expect(page).to have_content('Project was successfully updated.')
     expect(page).to have_content('$1,500')
-
   end
 end

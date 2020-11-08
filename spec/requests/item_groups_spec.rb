@@ -15,14 +15,14 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/item_groups', type: :request do
-  let(:current_user) {
+  let(:current_user) do
     project_owner
-  }
-  let(:project_owner) {
+  end
+  let(:project_owner) do
     email = 'foo@test.com'
     password = 'test123456'
     User.create(email: email, password: password)
-  }
+  end
   let(:contributing_user) do
     u = User.create(email: 'contrib@1.com', password: 'test123456')
     Contributor.create(user: u, project: project)
@@ -33,6 +33,7 @@ RSpec.describe '/item_groups', type: :request do
   end
   # ItemGroup. As you add validations to ItemGroup, be sure to
   # adjust the attributes here as well.
+
   let(:project) do
     project = Project.new(name: 'foo', budget: 1000)
     project_owner.add_project(project)
@@ -77,6 +78,7 @@ RSpec.describe '/item_groups', type: :request do
       end
       context 'when logged in as a contributing user' do
         let(:current_user) { contributing_user }
+
         it 'creates a new ItemGroup' do
           expect do
             post project_item_groups_url(project), params: { item_group: valid_attributes }
@@ -92,8 +94,10 @@ RSpec.describe '/item_groups', type: :request do
         end.to change(ItemGroup, :count).by(0)
       end
     end
+
     context 'when not logged in as project owner' do
       let(:current_user) { User.create(email: 'other@test.com', password: 'test1234556') }
+
       it 'does not create a new ItemGroup' do
         expect do
           post project_item_groups_url(project), params: { item_group: valid_attributes }
@@ -108,6 +112,7 @@ RSpec.describe '/item_groups', type: :request do
         name: 'updated',
       }
     end
+
     context 'with valid parameters' do
       it 'updates the requested item_group' do
         item_group = ItemGroup.create! valid_attributes
@@ -117,6 +122,7 @@ RSpec.describe '/item_groups', type: :request do
       end
       context 'when logged in as a contributing user' do
         let(:current_user) { contributing_user }
+
         it 'updates the requested item_group' do
           item_group = ItemGroup.create! valid_attributes
           patch project_item_group_url(project, item_group), params: { item_group: new_attributes }
@@ -133,13 +139,15 @@ RSpec.describe '/item_groups', type: :request do
         expect(response).to be_successful
       end
     end
+
     context 'when not logged in as project owner' do
       let(:current_user) { User.create(email: 'other@test.com', password: 'test1234556') }
+
       it 'does not update the requested item_group' do
         item_group = ItemGroup.create! valid_attributes
         expect do
           patch project_item_group_url(project, item_group), params: { item_group: new_attributes }
-        end.to_not change { item_group.reload.as_json }
+        end.not_to change { item_group.reload.as_json }
       end
     end
   end
@@ -153,6 +161,7 @@ RSpec.describe '/item_groups', type: :request do
     end
     context 'when logged in as a contributing user' do
       let(:current_user) { contributing_user }
+
       it 'destroys the requested item_group' do
         item_group = ItemGroup.create! valid_attributes
         expect do
@@ -160,8 +169,10 @@ RSpec.describe '/item_groups', type: :request do
         end.to change(ItemGroup, :count).by(-1)
       end
     end
+
     context 'when not logged in as project owner' do
       let(:current_user) { User.create(email: 'other@test.com', password: 'test1234556') }
+
       it 'does not destroy the requested item_group' do
         item_group = ItemGroup.create! valid_attributes
         expect do

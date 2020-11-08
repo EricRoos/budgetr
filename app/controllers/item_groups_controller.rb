@@ -71,7 +71,7 @@ class ItemGroupsController < ApplicationController
 
   def set_and_authorize_project
     @project = Project.find(params[:project_id])
-    head :not_found unless @project.present?
+    head :not_found if @project.blank?
     @project
   end
 

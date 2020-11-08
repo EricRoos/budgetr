@@ -7,13 +7,13 @@ class ItemsController < ApplicationController
 
   # GET /items
   # GET /items.json
-  #def index
+  # def index
   #  @items = Item.all
-  #end
+  # end
 
   # GET /items/1
   # GET /items/1.json
-  #def show; end
+  # def show; end
 
   # GET /items/new
   def new
@@ -32,9 +32,9 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html {
+        format.html do
           redirect_to project_item_group_path(@project, @item.item_group), notice: 'Item was successfully created.'
-        }
+        end
         format.js
         format.json { render :show, status: :created, location: @item }
       else
@@ -79,7 +79,7 @@ class ItemsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_and_authorize_project
     @project = Project.find(params[:project_id])
-    head :not_found unless @project.present?
+    head :not_found if @project.blank?
     @project
   end
 

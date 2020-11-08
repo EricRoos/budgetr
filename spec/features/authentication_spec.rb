@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "Authentications", type: :feature do
-
   scenario 'Logging In' do
     email = 'foo@test.com'
     password = 'test123456'

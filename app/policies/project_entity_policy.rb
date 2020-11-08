@@ -1,5 +1,4 @@
 class ProjectEntityPolicy < ProjectPolicy
-
   def restore?
     super || contributes_to_project?
   end
@@ -32,11 +31,11 @@ class ProjectEntityPolicy < ProjectPolicy
     super || contributes_to_project?
   end
 
-  protected 
+  protected
 
-    def project
-      record.project
-    end
+  def project
+    record.project
+  end
 
   class Scope < Scope
     def resolve

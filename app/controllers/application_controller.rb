@@ -18,11 +18,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def check_for_restorable
-      return if session[:restorable_id].blank?
 
-      @restorable ||= PaperTrail::Version.where(id: session[:restorable_id]).first
-      session[:restorable_id] = nil
-      @restorable
-    end
+  def check_for_restorable
+    return if session[:restorable_id].blank?
+
+    @restorable ||= PaperTrail::Version.where(id: session[:restorable_id]).first
+    session[:restorable_id] = nil
+    @restorable
+  end
 end

@@ -1,5 +1,4 @@
 class ContributorPolicy < ProjectPolicy
-
   def restore?
     owns_project?
   end
@@ -21,5 +20,4 @@ class ContributorPolicy < ProjectPolicy
   def project
     record.project
   end
-
 end

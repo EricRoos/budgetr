@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   #
   root to: 'projects#index'
   resources :projects do
-    resources :contributors, except: [ :edit, :update ]
+    resources :contributors, except: [:edit, :update]
     resources :item_groups do
-      resources :items, except: [ :index ]
+      resources :items, except: [:index]
     end
   end
 

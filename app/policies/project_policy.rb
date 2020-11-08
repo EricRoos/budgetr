@@ -1,5 +1,4 @@
 class ProjectPolicy < ApplicationPolicy
-
   def restore?
     owns_project?
   end
@@ -33,17 +32,18 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   protected
-    def owns_project?
-      UserProject.where(project: project, user: user).exists?
-    end
 
-    def contributes_to_project?
-      project.contributing_users.where(id: user).exists?
-    end
+  def owns_project?
+    UserProject.where(project: project, user: user).exists?
+  end
 
-    def project
-      record
-    end
+  def contributes_to_project?
+    project.contributing_users.where(id: user).exists?
+  end
+
+  def project
+    record
+  end
 
   class Scope < Scope
     def resolve

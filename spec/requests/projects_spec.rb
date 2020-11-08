@@ -15,7 +15,6 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/projects', type: :request do
-
   let(:current_user) do
     email = 'foo@test.com'
     password = 'test123456'
@@ -33,14 +32,14 @@ RSpec.describe '/projects', type: :request do
   let(:valid_attributes) do
     {
       name: 'Valid Attributes',
-      budget: 1500
+      budget: 1500,
     }
   end
 
   let(:invalid_attributes) do
     {
       name: 'Foo',
-      budget: -1500
+      budget: -1500,
     }
   end
 
@@ -124,7 +123,7 @@ RSpec.describe '/projects', type: :request do
         current_user.add_project(project)
         expect do
           patch project_url(project), params: { project: new_attributes }
-        end.to change{ project.reload.as_json }
+        end.to change { project.reload.as_json }
         expect(response).to redirect_to(project_url(project))
       end
 
@@ -136,7 +135,7 @@ RSpec.describe '/projects', type: :request do
           project_owner.add_project(project)
           expect do
             patch project_url(project), params: { project: new_attributes }
-          end.to_not change{ project.reload.as_json }
+          end.not_to change { project.reload.as_json }
         end
       end
     end

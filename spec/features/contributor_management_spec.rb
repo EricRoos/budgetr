@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.feature "Contributor Management", type: :feature do
-  let(:current_user) {
+  let(:current_user) do
     project_owner
-  }
+  end
 
-  let(:project_owner) {
+  let(:project_owner) do
     email = 'foo@test.com'
     password = 'test123456'
     User.create(email: email, password: password)
-  }
+  end
 
   let(:project) do
     project = Project.new(name: 'foo', budget: 1000)
@@ -22,6 +22,7 @@ RSpec.feature "Contributor Management", type: :feature do
   end
 
   let(:new_contributing_user) { User.create(email: 'contrib@1.com', password: 'test123456') }
+
   scenario 'Adds a contributor' do
     visit edit_project_path(project)
     click_on "Add Contributor"

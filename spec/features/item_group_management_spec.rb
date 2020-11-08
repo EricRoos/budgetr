@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Item Groupmanagement', type: :feature do
-  let(:current_user) {
+  let(:current_user) do
     email = 'foo@test.com'
     password = 'test123456'
     User.create(email: email, password: password)
-  }
+  end
   let(:project_owner) { current_user }
 
   let(:project) do

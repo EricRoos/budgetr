@@ -4,11 +4,11 @@ require 'rails_helper'
 
 RSpec.feature 'Item Management', type: :feature do
   let(:item_group) { ItemGroup.create(project: project, budget: 1000, name: 'foo group') }
-  let(:current_user) {
+  let(:current_user) do
     email = 'foo@test.com'
     password = 'test123456'
     User.create(email: email, password: password)
-  }
+  end
   let(:project_owner) { current_user }
 
   let(:project) do

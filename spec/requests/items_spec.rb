@@ -15,16 +15,16 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/items', type: :request do
-  let(:current_user) {
+  let(:current_user) do
     project_owner
-  }
+  end
 
-  let(:project_owner) {
+  let(:project_owner) do
     email = 'foo@test.com'
     password = 'test123456'
     User.create(email: email, password: password)
-  }
-    
+  end
+
   let(:contributing_user) do
     u = User.create(email: 'contrib@1.com', password: 'test123456')
     Contributor.create(user: u, project: project)
@@ -34,6 +34,7 @@ RSpec.describe '/items', type: :request do
   before do
     sign_in current_user
   end
+
   let(:project) do
     project = Project.new(name: 'foo', budget: 1000)
     project_owner.add_project(project)
@@ -78,6 +79,7 @@ RSpec.describe '/items', type: :request do
       end
       context 'when logged in as a contributing user' do
         let(:current_user) { contributing_user }
+
         it 'creates a new Item' do
           expect do
             post project_item_group_items_url(project, item_group), params: { item: valid_attributes }
@@ -86,7 +88,6 @@ RSpec.describe '/items', type: :request do
       end
     end
 
-
     context 'with invalid parameters' do
       it 'does not create a new Item' do
         expect do
@@ -94,8 +95,10 @@ RSpec.describe '/items', type: :request do
         end.to change(Item, :count).by(0)
       end
     end
+
     context 'when not logged in as project owner' do
       let(:current_user) { User.create(email: 'other@test.com', password: 'test1234556') }
+
       it 'does not create a new Item' do
         expect do
           post project_item_group_items_url(project, item_group), params: { item: valid_attributes }
@@ -127,14 +130,16 @@ RSpec.describe '/items', type: :request do
         expect(response).to be_successful
       end
     end
+
     context 'when not logged in as project owner' do
       let(:current_user) { User.create(email: 'other@test.com', password: 'test1234556') }
+
       it 'does not update the item' do
         item = Item.create! valid_attributes
         expect do
           patch project_item_group_item_url(project, item_group, item), params: { item: valid_attributes }
-        end.to_not change { item.reload.as_json }
-        expect(response).to_not be_successful
+        end.not_to change { item.reload.as_json }
+        expect(response).not_to be_successful
       end
     end
   end
@@ -148,6 +153,7 @@ RSpec.describe '/items', type: :request do
     end
     context 'when not logged in as project owner' do
       let(:current_user) { User.create(email: 'other@test.com', password: 'test1234556') }
+
       it 'does not destroy the item' do
         item = Item.create! valid_attributes
         expect do
