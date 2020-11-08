@@ -37,7 +37,14 @@ RSpec.feature "Contributor Management", type: :feature do
     click_on "Create Contributor"
     expect(page).to have_content('1 error')
     expect(page).to have_content('User must exist')
-
   end
 
+  scenario 'delete a contributor', js: true do
+    Contributor.create(project: project, user: new_contributing_user)
+    visit edit_project_path(project)
+    page.accept_confirm do
+      click_on 'Delete'
+    end
+    expect(page).to have_content('Contributor was successfully destroyed.')
+  end
 end
