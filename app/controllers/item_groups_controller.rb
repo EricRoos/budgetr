@@ -17,6 +17,7 @@ class ItemGroupsController < ApplicationController
   # GET /item_groups/new
   def new
     @item_group = @project.item_groups.build
+    authorize @item_group
   end
 
   # GET /item_groups/1/edit
@@ -26,7 +27,7 @@ class ItemGroupsController < ApplicationController
   # POST /item_groups.json
   def create
     @item_group = @project.item_groups.build(item_group_params)
-    authorize @item_group, policy_class: ProjectEntityPolicy
+    authorize @item_group
 
     respond_to do |format|
       if @item_group.save
@@ -69,13 +70,15 @@ class ItemGroupsController < ApplicationController
   private
 
   def set_and_authorize_project
-    @project = Project.find(params[:project_id])
+    @project = ProjectPolicy::Scope.new(current_user, Project.all).resolve.where(id: params[:project_id]).first
+    head :not_found unless @project.present?
+    @project
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_item_group
     @item_group = ItemGroup.find(params[:id])
-    authorize @item_group, policy_class: ProjectEntityPolicy
+    authorize @item_group
   end
 
   # Only allow a list of trusted parameters through.

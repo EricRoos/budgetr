@@ -9,6 +9,10 @@ class Item < ApplicationRecord
 
   validates_numericality_of :quantity, greater_than_or_equal_to: 0
 
+  def self.policy_class
+    ProjectEntityPolicy
+  end
+
   def total_price
     return Money.new(0) if purchase_price_cents.blank?
 

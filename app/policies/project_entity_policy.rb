@@ -1,5 +1,9 @@
 class ProjectEntityPolicy < ProjectPolicy
 
+  def restore?
+    super || contributes_to_project?
+  end
+
   def index?
     super || contributes_to_project?
   end

@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pundit
+  after_action :verify_authorized, unless: -> { devise_controller? }
 
   before_action :authenticate_user!
   before_action :check_for_restorable

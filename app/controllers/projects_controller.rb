@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    authorize Project
     @projects = policy_scope(Project.all)
   end
 
@@ -18,6 +19,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
+    authorize Project
     @project = Project.new
   end
 
@@ -27,6 +29,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    authorize Project
     @project = Project.new(project_params)
 
     respond_to do |format|

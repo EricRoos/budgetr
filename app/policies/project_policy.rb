@@ -1,7 +1,11 @@
 class ProjectPolicy < ApplicationPolicy
 
-  def index?
+  def restore?
     owns_project?
+  end
+
+  def index?
+    true
   end
 
   def show?
@@ -9,7 +13,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def create?
-    owns_project?
+    true
   end
 
   def new?
