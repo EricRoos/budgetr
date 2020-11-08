@@ -31,4 +31,24 @@ RSpec.describe Project, type: :model do
       it { is_expected.to eq budget }
     end
   end
+
+  describe 'restore deleted' do
+    it 'can restore a project and its item groups' do
+      user = User.create(email: 'foo@foo.com', password: 'test123456')
+      project = Project.create(name: 'foo', budget: 1500)
+      user.add_project(project)
+      project.item_groups.create(name: 'ig1', budget: 1000)
+      project.item_groups.create(name: 'ig1', budget: 1000)
+      project.item_groups.create(name: 'ig1', budget: 1000)
+      project.destroy
+      project = project.versions.last.reify(has_many: true, belongs_to: true, has_one: true)
+      project.save(validate: false)
+      project.reload
+      user.reload
+      expect(project.valid?).to be true
+      expect(project.persisted?).to be true
+      expect(project.item_groups.count).to eq(3)
+      expect(Project.all.count).to eq(1)
+    end
+  end
 end

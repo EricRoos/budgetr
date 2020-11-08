@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'lograge'
 gem 'money-rails'
 gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 gem 'devise'
 gem 'pundit'
 

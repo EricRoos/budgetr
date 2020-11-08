@@ -2,8 +2,9 @@
 
 class ItemGroup < ApplicationRecord
   has_paper_trail
-  belongs_to :project, touch: true
-  has_many :items, dependent: :destroy
+  belongs_to :project, touch: true, autosave: true, inverse_of: :item_groups
+  has_many :items, dependent: :destroy, inverse_of: :item_group
+
   has_rich_text :note
 
   validates_numericality_of :budget, greater_than_or_equal_to: 0

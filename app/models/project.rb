@@ -2,11 +2,13 @@
 
 class Project < ApplicationRecord
   has_paper_trail
-  has_many :item_groups
-  has_many :items, through: :item_groups
+
+  has_many :item_groups, dependent: :destroy, autosave: true, inverse_of: :project
+
+
   validates_numericality_of :budget, greater_than_or_equal_to: 0
 
-  has_many :user_projects, dependent: :destroy
+  has_many :user_projects, dependent: :destroy, autosave: true, inverse_of: :project
   has_many :users, through: :user_projects
 
   def budget_remaining
