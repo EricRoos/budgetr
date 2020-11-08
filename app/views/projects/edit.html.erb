@@ -1,6 +1,32 @@
+<% content_for :breadcrumbs do %>
+  <li class="breadcrumb-item"><%= link_to 'Projects', projects_path %></li>
+<% end %>
+
 <h1>Editing Project</h1>
-
+<hr/>
+<h2>Details</h2>
 <%= render 'form', project: @project %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<hr/>
+<section>
+  <h2>Contributors</h2>
+  <% contributors = @project.contributors.includes(:user) %>
+  <% if contributors.size > 0 %>
+    <table class='table'>
+      <thead>
+        <tr>Email</tr>
+        <tr></tr>
+      </thead>
+      <tbody>
+        <% @project.contributors.includes(:user).each do |contributor| %>
+          <tr>
+            <td>
+              <%= contributor.user.email %>
+            </td>
+            <td><%= link_to 'Delete', project_contributor_path(@project, contributor), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <%= link_to 'Add Contributor', new_project_contributor_path(@project), class: 'btn btn-outline-primary' %>
+</section>

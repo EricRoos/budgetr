@@ -12,13 +12,8 @@
   </thead>
 
   <tbody>
-    <% @contributors.each do |contributor| %>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= contributor.user_id %></td>
-        <td><%= contributor.project_id %></td>
-        <td><%= link_to 'Show', contributor %></td>
-        <td><%= link_to 'Edit', edit_contributor_path(contributor) %></td>
-        <td><%= link_to 'Destroy', contributor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +21,4 @@
 
 <br>
 
-<%= link_to 'New Contributor', new_contributor_path %>
+<%= link_to 'New Contributor', new_project_contributor_path(@project) %>

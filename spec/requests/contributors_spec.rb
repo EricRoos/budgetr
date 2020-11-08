@@ -13,100 +13,61 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/contributors", type: :request do
-  # Contributor. As you add validations to Contributor, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:current_user) {
+    email = 'foo@test.com'
+    password = 'test123456'
+    User.create(email: email, password: password)
   }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  describe "GET /index" do
-    it "renders a successful response" do
-      Contributor.create! valid_attributes
-      get contributors_url
-      expect(response).to be_successful
-    end
+  let(:project_owner) { current_user }
+  before do
+    sign_in current_user
+  end
+  let(:project) do
+    project = Project.new(name: 'foo', budget: 1000)
+    project_owner.add_project(project)
+    project
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      contributor = Contributor.create! valid_attributes
-      get contributor_url(contributor)
-      expect(response).to be_successful
-    end
-  end
+  let(:contributing_user) { User.create(email: 'contrib@foo.com', password: 'test123456') }
+  let(:valid_attributes) {{
+    user_id: contributing_user.id
+  }}
+
+  let(:invalid_attributes) {{
+    user_id: -1
+  }}
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_contributor_url
+      get new_project_contributor_url(project)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "render a successful response" do
-      contributor = Contributor.create! valid_attributes
-      get edit_contributor_url(contributor)
-      expect(response).to be_successful
-    end
-  end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Contributor" do
         expect {
-          post contributors_url, params: { contributor: valid_attributes }
+          post project_contributors_url(project), params: { contributor: { user: { email: contributing_user.email} }}
         }.to change(Contributor, :count).by(1)
       end
 
       it "redirects to the created contributor" do
-        post contributors_url, params: { contributor: valid_attributes }
-        expect(response).to redirect_to(contributor_url(Contributor.last))
+        post project_contributors_url(project), params: { contributor: { user: { email: contributing_user.email} }}
+        expect(response).to redirect_to(edit_project_path(project))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Contributor" do
         expect {
-          post contributors_url, params: { contributor: invalid_attributes }
+          post project_contributors_url(project), params: { contributor: { user: { email: 'bad'} }}
         }.to change(Contributor, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post contributors_url, params: { contributor: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested contributor" do
-        contributor = Contributor.create! valid_attributes
-        patch contributor_url(contributor), params: { contributor: new_attributes }
-        contributor.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the contributor" do
-        contributor = Contributor.create! valid_attributes
-        patch contributor_url(contributor), params: { contributor: new_attributes }
-        contributor.reload
-        expect(response).to redirect_to(contributor_url(contributor))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
-        contributor = Contributor.create! valid_attributes
-        patch contributor_url(contributor), params: { contributor: invalid_attributes }
+        post project_contributors_url(project), params: { contributor: { user: { email: 'bad'} }}
         expect(response).to be_successful
       end
     end
@@ -114,16 +75,16 @@ RSpec.describe "/contributors", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested contributor" do
-      contributor = Contributor.create! valid_attributes
+      contributor = project.contributors.create! valid_attributes
       expect {
-        delete contributor_url(contributor)
+        delete project_contributor_url(project, contributor)
       }.to change(Contributor, :count).by(-1)
     end
 
     it "redirects to the contributors list" do
-      contributor = Contributor.create! valid_attributes
-      delete contributor_url(contributor)
-      expect(response).to redirect_to(contributors_url)
+      contributor = project.contributors.create! valid_attributes
+      delete project_contributor_url(project, contributor)
+      expect(response).to redirect_to(edit_project_url(project))
     end
   end
 end

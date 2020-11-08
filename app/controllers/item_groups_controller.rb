@@ -70,7 +70,7 @@ class ItemGroupsController < ApplicationController
   private
 
   def set_and_authorize_project
-    @project = ProjectPolicy::Scope.new(current_user, Project.all).resolve.where(id: params[:project_id]).first
+    @project = Project.find(params[:project_id])
     head :not_found unless @project.present?
     @project
   end

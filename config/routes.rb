@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :contributors
   devise_for :users
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
 
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   #
   root to: 'projects#index'
   resources :projects do
+    resources :contributors, except: [ :edit, :update ]
     resources :item_groups do
       resources :items, except: [ :index ]
     end

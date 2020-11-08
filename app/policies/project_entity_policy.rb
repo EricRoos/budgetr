@@ -13,7 +13,7 @@ class ProjectEntityPolicy < ProjectPolicy
   end
 
   def create?
-    super || contributes_to_project?
+    owns_project? || contributes_to_project?
   end
 
   def new?
@@ -33,9 +33,6 @@ class ProjectEntityPolicy < ProjectPolicy
   end
 
   protected 
-    def contributes_to_project?
-      project.contributing_users.where(id: user).exists?
-    end
 
     def project
       record.project

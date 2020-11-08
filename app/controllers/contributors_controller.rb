@@ -1,34 +1,23 @@
 class ContributorsController < ApplicationController
+  before_action :set_and_authorize_project
   before_action :set_contributor, only: [:show, :edit, :update, :destroy]
 
-  # GET /contributors
-  # GET /contributors.json
-  def index
-    @contributors = Contributor.all
-  end
-
-  # GET /contributors/1
-  # GET /contributors/1.json
-  def show
-  end
 
   # GET /contributors/new
   def new
-    @contributor = Contributor.new
-  end
-
-  # GET /contributors/1/edit
-  def edit
+    @contributor = @project.contributors.build
+    authorize @contributor
   end
 
   # POST /contributors
   # POST /contributors.json
   def create
-    @contributor = Contributor.new(contributor_params)
+    @contributor = @project.contributors.build({user: User.where(email: params[:contributor][:user][:email]).first})
+    authorize @contributor
 
     respond_to do |format|
       if @contributor.save
-        format.html { redirect_to @contributor, notice: 'Contributor was successfully created.' }
+        format.html { redirect_to edit_project_path(@project), notice: 'Contributor was successfully created.' }
         format.json { render :show, status: :created, location: @contributor }
       else
         format.html { render :new }
@@ -37,34 +26,28 @@ class ContributorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contributors/1
-  # PATCH/PUT /contributors/1.json
-  def update
-    respond_to do |format|
-      if @contributor.update(contributor_params)
-        format.html { redirect_to @contributor, notice: 'Contributor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contributor }
-      else
-        format.html { render :edit }
-        format.json { render json: @contributor.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /contributors/1
   # DELETE /contributors/1.json
   def destroy
     @contributor.destroy
     respond_to do |format|
-      format.html { redirect_to contributors_url, notice: 'Contributor was successfully destroyed.' }
+      format.html { redirect_to edit_project_path(@project), notice: 'Contributor was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+    def set_and_authorize_project
+      @project = Project.where(id: params[:project_id]).first
+      head :not_found unless @project.present?
+      @project
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_contributor
       @contributor = Contributor.find(params[:id])
+      authorize @contributor
     end
 
     # Only allow a list of trusted parameters through.

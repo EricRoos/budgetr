@@ -9,7 +9,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def show?
-    owns_project?
+    owns_project? || contributes_to_project?
   end
 
   def create?
@@ -37,13 +37,17 @@ class ProjectPolicy < ApplicationPolicy
       UserProject.where(project: project, user: user).exists?
     end
 
+    def contributes_to_project?
+      project.contributing_users.where(id: user).exists?
+    end
+
     def project
       record
     end
 
   class Scope < Scope
     def resolve
-      user.projects.merge(scope)
+      user.projects + Project.where(id: Contributor.where(user_id: user).pluck(:project_id))
     end
   end
 end
