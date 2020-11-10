@@ -17,11 +17,11 @@ RSpec.feature "Contributor Management", type: :feature do
     project
   end
 
+  let(:new_contributing_user) { User.create(email: 'contrib@1.com', password: 'test123456') }
+
   before do
     sign_in current_user
   end
-
-  let(:new_contributing_user) { User.create(email: 'contrib@1.com', password: 'test123456') }
 
   scenario 'Adds a contributor' do
     visit edit_project_path(project)

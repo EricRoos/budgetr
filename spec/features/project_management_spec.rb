@@ -22,7 +22,7 @@ RSpec.feature 'Project management', type: :feature do
   let(:current_user) { project_owner }
 
   let(:project) do
-    project = Project.new(name: 'My Project', budget: 1000)
+    Project.new(name: 'My Project', budget: 1000)
   end
 
   before do

@@ -22,13 +22,6 @@ RSpec.describe '/projects', type: :request do
   end
 
   let(:project_owner) { current_user }
-
-  before do
-    sign_in current_user
-  end
-
-  # Project. As you add validations to Project, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) do
     {
       name: 'Valid Attributes',
@@ -41,6 +34,10 @@ RSpec.describe '/projects', type: :request do
       name: 'Foo',
       budget: -1500,
     }
+  end
+
+  before do
+    sign_in current_user
   end
 
   describe 'GET /index' do

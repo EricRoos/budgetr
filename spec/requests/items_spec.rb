@@ -30,11 +30,6 @@ RSpec.describe '/items', type: :request do
     Contributor.create(user: u, project: project)
     u
   end
-
-  before do
-    sign_in current_user
-  end
-
   let(:project) do
     project = Project.new(name: 'foo', budget: 1000)
     project_owner.add_project(project)
@@ -53,6 +48,10 @@ RSpec.describe '/items', type: :request do
 
   let(:invalid_attributes) do
     { quantity: -1 }
+  end
+
+  before do
+    sign_in current_user
   end
 
   describe 'GET /new' do

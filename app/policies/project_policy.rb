@@ -47,7 +47,7 @@ class ProjectPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return [] unless user && user.persisted?
+      return [] unless user&.persisted?
       user.projects + Project.where(id: Contributor.where(user_id: user).pluck(:project_id))
     end
   end

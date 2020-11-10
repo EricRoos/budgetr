@@ -28,9 +28,6 @@ RSpec.describe '/item_groups', type: :request do
     Contributor.create(user: u, project: project)
     u
   end
-  before do
-    sign_in current_user
-  end
   # ItemGroup. As you add validations to ItemGroup, be sure to
   # adjust the attributes here as well.
 
@@ -52,6 +49,10 @@ RSpec.describe '/item_groups', type: :request do
     {
       budget: -1000,
     }
+  end
+
+  before do
+    sign_in current_user
   end
 
   describe 'GET /new' do

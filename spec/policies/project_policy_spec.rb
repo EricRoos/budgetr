@@ -19,7 +19,7 @@ RSpec.describe ProjectPolicy, type: :policy do
   end
 
   let(:other) do
-    u = User.create(email: 'other@test.com', password: 'test123456')
+    User.create(email: 'other@test.com', password: 'test123456')
   end
 
   describe 'Scope' do
@@ -43,20 +43,44 @@ RSpec.describe ProjectPolicy, type: :policy do
   end
 
   permissions :show? do
-    it { is_expected.to permit(project_owner, project) }
-    it { is_expected.to permit(contributor, project) }
-    it { is_expected.not_to permit(other, project) }
+    context 'when project owner' do
+      it { is_expected.to permit(project_owner, project) }
+    end
+
+    context 'when contributor' do
+      it { is_expected.to permit(contributor, project) }
+    end
+
+    contributor 'when other' do
+      it { is_expected.not_to permit(other, project) }
+    end
   end
 
   permissions :new?, :create? do
-    it { is_expected.to permit(project_owner, project) }
-    it { is_expected.to permit(contributor, project) }
-    it { is_expected.to permit(other, project) }
+    context 'when project owner' do
+      it { is_expected.to permit(project_owner, project) }
+    end
+
+    context 'when contributor' do
+      it { is_expected.to permit(contributor, project) }
+    end
+
+    context 'when other' do
+      it { is_expected.to permit(other, project) }
+    end
   end
 
   permissions :update?, :edit?, :destroy? do
-    it { is_expected.to permit(project_owner, project) }
-    it { is_expected.not_to permit(contributor, project) }
-    it { is_expected.not_to permit(other, project) }
+    context 'when project owner' do
+      it { is_expected.to permit(project_owner, project) }
+    end
+
+    context 'when contributor' do
+      it { is_expected.not_to permit(contributor, project) }
+    end
+
+    context 'when other' do
+      it { is_expected.not_to permit(other, project) }
+    end
   end
 end

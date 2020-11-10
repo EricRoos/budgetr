@@ -19,10 +19,6 @@ RSpec.describe "/contributors", type: :request do
     User.create(email: email, password: password)
   end
   let(:project_owner) { current_user }
-  before do
-    sign_in current_user
-  end
-
   let(:project) do
     project = Project.new(name: 'foo', budget: 1000)
     project_owner.add_project(project)
@@ -40,6 +36,10 @@ RSpec.describe "/contributors", type: :request do
     {
       user_id: -1,
     }
+  end
+
+  before do
+    sign_in current_user
   end
 
   describe "GET /new" do
