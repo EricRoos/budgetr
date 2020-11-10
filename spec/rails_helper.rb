@@ -6,6 +6,10 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter %r{^/app/graphql/}
   add_filter %r{^/app/channels/}
+
+  add_filter do |source_file|
+    source_file.lines.count < 5
+  end
 end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

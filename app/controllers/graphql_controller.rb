@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# :nocov:
 
 class GraphqlController < ApplicationController
   # If accessing from outside this domain, nullify the session
@@ -49,3 +50,4 @@ class GraphqlController < ApplicationController
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
   end
 end
+# :nocov:
