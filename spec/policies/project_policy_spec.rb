@@ -51,7 +51,7 @@ RSpec.describe ProjectPolicy, type: :policy do
       it { is_expected.to permit(contributor, project) }
     end
 
-    contributor 'when other' do
+    context 'when other' do
       it { is_expected.not_to permit(other, project) }
     end
   end

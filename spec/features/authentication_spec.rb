@@ -15,7 +15,7 @@ RSpec.feature "Authentications", type: :feature do
   scenario 'Logging out' do
     email = 'foo@test.com'
     password = 'test123456'
-    User.create(email: email, password: password)
+    user = User.create(email: email, password: password)
     sign_in user
     visit root_path
     click_on 'Sign Out'
