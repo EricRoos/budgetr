@@ -23,8 +23,20 @@ RSpec.describe ProjectPolicy, type: :policy do
   }
 
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Scope' do
+    subject { described_class::Scope.new(current_user, Project.all).resolve }
+    let(:current_user) { project_owner }
+    it { is_expected.to eq [project] }
+
+    context 'when logged as contributor' do
+      let(:current_user) { contributor }
+      it { is_expected.to eq [project] }
+    end
+
+    context 'when not logged' do
+      let(:current_user) { nil }
+      it { is_expected.to eq [] }
+    end
   end
 
   permissions :show? do
