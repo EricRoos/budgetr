@@ -3,9 +3,9 @@ class ProjectEntityPolicy < ProjectPolicy
     super || contributes_to_project?
   end
 
-  #def index?
+  # def index?
   #  super || contributes_to_project?
-  #end
+  # end
 
   def show?
     super || contributes_to_project?

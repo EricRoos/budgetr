@@ -19,7 +19,7 @@ RSpec.feature 'Project management', type: :feature do
     u
   end
 
-  let(:current_user) { project_owner}
+  let(:current_user) { project_owner }
 
   let(:project) do
     project = Project.new(name: 'My Project', budget: 1000)
@@ -58,18 +58,21 @@ RSpec.feature 'Project management', type: :feature do
 
   context 'as contributor' do
     let(:current_user) { contributor }
+
     scenario 'viewing projects' do
       visit projects_path
-      expect(page).to have_content('Projects') 
-      expect(page).to have_content(project.name) 
+      expect(page).to have_content('Projects')
+      expect(page).to have_content(project.name)
     end
   end
+
   context 'as owner' do
     let(:current_user) { project_owner }
+
     scenario 'viewing projects' do
       visit projects_path
-      expect(page).to have_content('Projects') 
-      expect(page).to have_content(project.name) 
+      expect(page).to have_content('Projects')
+      expect(page).to have_content(project.name)
     end
   end
 end
