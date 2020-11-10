@@ -3,9 +3,9 @@ class ProjectEntityPolicy < ProjectPolicy
     super || contributes_to_project?
   end
 
-  def index?
-    super || contributes_to_project?
-  end
+  #def index?
+  #  super || contributes_to_project?
+  #end
 
   def show?
     super || contributes_to_project?
@@ -35,11 +35,5 @@ class ProjectEntityPolicy < ProjectPolicy
 
   def project
     record.project
-  end
-
-  class Scope < Scope
-    def resolve
-      user.projects.merge(scope)
-    end
   end
 end

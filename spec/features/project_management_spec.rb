@@ -3,17 +3,26 @@
 require 'rails_helper'
 
 RSpec.feature 'Project management', type: :feature do
-  let(:current_user) do
+  let(:project_owner) do
     email = 'foo@test.com'
     password = 'test123456'
-    User.create(email: email, password: password)
+    u = User.create(email: email, password: password)
+    u.add_project(project)
+    u
   end
-  let(:project_owner) { current_user }
+
+  let(:contributor) do
+    email = 'contrib@test.com'
+    password = 'test123456'
+    u = User.create(email: email, password: password)
+    Contributor.create(project: project, user: u)
+    u
+  end
+
+  let(:current_user) { project_owner}
 
   let(:project) do
-    project = Project.new(name: 'foo', budget: 1000)
-    project_owner.add_project(project)
-    project
+    project = Project.new(name: 'My Project', budget: 1000)
   end
 
   before do
@@ -45,5 +54,22 @@ RSpec.feature 'Project management', type: :feature do
     click_on 'Update Project'
     expect(page).to have_content('Project was successfully updated.')
     expect(page).to have_content('$1,500')
+  end
+
+  context 'as contributor' do
+    let(:current_user) { contributor }
+    scenario 'viewing projects' do
+      visit projects_path
+      expect(page).to have_content('Projects') 
+      expect(page).to have_content(project.name) 
+    end
+  end
+  context 'as owner' do
+    let(:current_user) { project_owner }
+    scenario 'viewing projects' do
+      visit projects_path
+      expect(page).to have_content('Projects') 
+      expect(page).to have_content(project.name) 
+    end
   end
 end

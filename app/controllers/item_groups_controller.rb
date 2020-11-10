@@ -4,12 +4,6 @@ class ItemGroupsController < ApplicationController
   before_action :set_and_authorize_project
   before_action :set_item_group, only: %i(show edit update destroy)
 
-  # GET /item_groups
-  # GET /item_groups.json
-  def index
-    @item_groups = @project.item_groups
-  end
-
   # GET /item_groups/1
   # GET /item_groups/1.json
   def show; end
