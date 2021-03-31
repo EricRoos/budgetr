@@ -13,7 +13,7 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.name %></td>
-        <td><%= project.budget %></td>
+        <td><%= project.formatted_budget %></td>
         <td><%= link_to 'Show', project %></td>
         <% if policy(project).edit? %>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>

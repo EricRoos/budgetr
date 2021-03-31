@@ -40,4 +40,8 @@ class Project < ApplicationRecord
   def budget
     super || 0
   end
+
+  def formatted_budget
+    Money.new(100 * budget).format
+  end
 end

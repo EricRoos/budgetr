@@ -56,6 +56,12 @@ RSpec.feature 'Project management', type: :feature do
     expect(page).to have_content('$1,500')
   end
 
+  scenario 'view projects' do
+    project.save
+    visit projects_path
+    expect(page).to have_content('$1,000')
+  end
+
   context 'as contributor' do
     let(:current_user) { contributor }
 

@@ -7,6 +7,7 @@ module Projects
     def project_name
       project.name
     end
+    alias :name :project_name
 
     def callout_boxes
       [
