@@ -21,9 +21,9 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY package.json yarn.lock Gemfile Gemfile.lock /app/
-RUN gem install bundler:2.1.4
+RUN gem install bundler:2.2.15
 
-RUN bundle install --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3 --without development test && yarn install
+RUN bundle config set --local without 'development test' && bundle install --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3 && yarn install
 
 
 COPY . /app
