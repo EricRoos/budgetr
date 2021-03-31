@@ -27,6 +27,7 @@ jobs:
           command: make circleci_deploy_pipeline
   test:
     environment:
+      RAILS_ENV: test
       DATABASE_URL: postgres://postgres:mysecretpassword@localhost/Budgetr_test
     docker:
       - image: circleci/ruby:3.0.0-node-browsers-legacy
