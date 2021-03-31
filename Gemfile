@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3.3', '>= 6.0.3.3'
@@ -27,6 +27,7 @@ gem 'paper_trail'
 gem 'paper_trail-association_tracking'
 gem 'devise'
 gem 'pundit'
+gem 'rexml'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
