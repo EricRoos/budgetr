@@ -5,5 +5,17 @@
 <% end %>
 
 <div data-item-group-id="<%=@item_group.id%>">
-  <%= render @item_group %>
+  <div class='row'>
+    <div class="col-md-4">
+      <%= turbo_stream_from @item_group %>
+      <%= render @item_group %>
+    </div>
+    <div class="col-md-8">
+      <% groups = @item_group.items.order("purchased asc nulls last, created_at desc").with_rich_text_note %>
+      <%= render partial: 'items/index', locals: { items: groups } %>
+      <div class="modal fade" id="newItemModal<%=@item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+        <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: @item_group) } %>
+      </div>
+    </div>
+  </div>
 </div>

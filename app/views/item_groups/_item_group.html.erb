@@ -1,79 +1,68 @@
 <% presenter = ItemGroups::ItemGroup.new(item_group: item_group) %>
-<div class='row'>
-  <div class="col-md-4">
-    <h3 class="d-flex justify-content-between align-items-center mb-3">
-      <span class="text-muted"><%= item_group.name %></span>
-      <span class="badge badge-secondary badge-pill">
-        <%= presenter.item_count %>
-      </span>
-    </h3>
+<div id="<%= dom_id(item_group)%>">
+  <h3 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-muted"><%= item_group.name %></span>
+    <span class="badge badge-secondary badge-pill">
+      <%= presenter.item_count %>
+    </span>
+  </h3>
 
-    <ul class="list-group mb-3">
-      <% presenter.metrics.each do |metric| %>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">
-              <%= metric[:name] %>
-            </h6>
-            <small class="text-muted">
-              <%= metric[:help_text] %>
-            </small>
-          </div>
-          <span class="text-muted">
-            <%= metric[:value] %>
-          </span>
-        </li>
-      <% end %>
-
+  <ul class="list-group mb-3">
+    <% presenter.metrics.each do |metric| %>
       <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
-          <h6 class="my-0">Total Budget</h6>
-          <small class="text-muted">Total amount to spend on this room</small>
+          <h6 class="my-0">
+            <%= metric[:name] %>
+          </h6>
+          <small class="text-muted">
+            <%= metric[:help_text] %>
+          </small>
         </div>
-        <span class="text-muted"><%= humanized_money_with_symbol(item_group.budget) %></span>
+        <span class="text-muted">
+          <%= metric[:value] %>
+        </span>
       </li>
-
-      <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-          <h6 class="my-0">Total allocated</h6>
-          <small class="text-muted">Estimate of total cost of items in room</small>
-        </div>
-        <span class="text-muted"><%= item_group.total_allocated.format %></span>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div>
-          <h6 class="my-0">Total Spent</h6>
-          <small class="text-muted">How much money has actually been spent</small>
-        </div>
-        <span class="text-muted"><%= item_group.total_spent.format %></span>
-      </li>
-
-
-      <li class="list-group-item d-flex justify-content-between lh-condensed">
-        <div class='w-100'>
-          <button class='btn btn-sm btn-block btn-primary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
-            Add Item
-          </button>
-          <button type="button" class="btn btn-sm btn-block btn-outline-secondary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
-            Edit Room
-          </button>
-          <hr/>
-          <%= link_to "Delete Room", [@project, item_group], method: :delete, class: 'btn btn-block btn-sm btn-outline-danger', data: { confirm: 'Are you sure?' } %> </td>
-        </div>
-        <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
-          <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="col-md-8">
-    <% cache item_group do %>
-      <% groups = item_group.items.order("purchased asc nulls last, created_at desc").with_rich_text_note %>
-      <%= render partial: 'items/index', locals: { items: groups } %>
-      <div class="modal fade" id="newItemModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
-        <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: item_group) } %>
-      </div>
     <% end %>
-  </div>
+
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div>
+        <h6 class="my-0">Total Budget</h6>
+        <small class="text-muted">Total amount to spend on this room</small>
+      </div>
+      <span class="text-muted"><%= humanized_money_with_symbol(item_group.budget) %></span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div>
+        <h6 class="my-0">Total allocated</h6>
+        <small class="text-muted">Estimate of total cost of items in room</small>
+      </div>
+      <span class="text-muted"><%= item_group.total_allocated.format %></span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div>
+        <h6 class="my-0">Total Spent</h6>
+        <small class="text-muted">How much money has actually been spent</small>
+      </div>
+      <span class="text-muted"><%= item_group.total_spent.format %></span>
+    </li>
+
+
+    <li class="list-group-item d-flex justify-content-between lh-condensed">
+      <div class='w-100'>
+        <button class='btn btn-sm btn-block btn-primary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
+          Add Item
+        </button>
+        <button type="button" class="btn btn-sm btn-block btn-outline-secondary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
+          Edit Room
+        </button>
+        <hr/>
+        <%= link_to "Delete Room", [item_group.project, item_group], method: :delete, class: 'btn btn-block btn-sm btn-outline-danger', data: { confirm: 'Are you sure?' } %> </td>
+      </div>
+      <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
+        <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
+      </div>
+    </li>
+  </ul>
 </div>

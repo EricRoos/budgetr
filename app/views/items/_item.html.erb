@@ -11,7 +11,7 @@
         <div class="dropdown-menu" aria-labelledby="itemActionsdropdownMenuButton<%=item.id%>">
           <% if !item.purchased %>
             <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-            <%= form_with(model: item, url:url) do |form| %>
+            <%= form_with(model: item, url:url, remote: true) do |form| %>
               <%= form.hidden_field :purchased, value: true %>
               <%= form.submit value: 'Purchase', class: 'dropdown-item' %>
             <% end %>
@@ -34,10 +34,11 @@
       <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
         Edit
       </a>
-      <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
-    </div>
-    <div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
-      <%= render partial: 'items/modal_form', locals: { item: item } %>
+      <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true,remote: true,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
     </div>
   </td>
+  <div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
+    <%= render partial: 'items/modal_form', locals: { item: item } %>
+  </div>
 </tr>
+<%= turbo_stream_from item %>

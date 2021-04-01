@@ -70,6 +70,7 @@ class ItemsController < ApplicationController
       format.html do
         redirect_to project_item_group_path(@project, @item_group), notice: 'Item was successfully destroyed.'
       end
+      format.js
       format.json { head :no_content }
     end
   end

@@ -7,11 +7,11 @@
       <th colspan=2></th>
     </tr>
   </thead>
-
-  <tbody>
+  
+  <tbody id='items'>
+    <%= turbo_stream_from "items" %>
     <% items.each do |item| %>
       <% cache item do %>
-        <%= turbo_stream_from item %>
         <%= render item %>
       <% end %>
     <% end %>

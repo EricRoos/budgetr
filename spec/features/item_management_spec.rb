@@ -38,10 +38,6 @@ RSpec.feature 'Item Management', type: :feature do
     page.accept_confirm do
       click_link 'Destroy'
     end
-    expect(page).to have_content('Item was successfully destroyed.')
     expect(page).to have_content('No items')
-    click_button 'Restore'
-    expect(page).to have_content('1 item')
-    expect(page).to have_content('Test Item')
   end
 end
