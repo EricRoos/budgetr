@@ -5,7 +5,9 @@ run:
 bash:
 	docker run -e RAILS_MASTER_KEY=${BUDGETRENCKEY} --rm -ti budgetr:latest bash
 prod_console:
-	docker run -e RAILS_MASTER_KEY=${BUDGETRENCKEY} --rm -ti ericroos13/budgetr:latest bundle exec rails c
+	ssh Budgetr -t docker run -e RAILS_MASTER_KEY=${BUDGETRENCKEY} --rm -ti ericroos13/budgetr:latest bundle exec rails c
+new_prod_console:
+	ssh Budgetr -t docker-compose run --rm app bundle exec rails c
 create_db:
 	docker run -e RAILS_MASTER_KEY=${BUDGETRENCKEY} --rm -ti budgetr:latest bundle exec rake db:create
 migrate_db:
