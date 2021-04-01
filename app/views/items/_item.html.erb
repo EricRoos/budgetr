@@ -19,7 +19,7 @@
           <a class="dropdown-item" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
             Edit
           </a>
-          <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
+          <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
         </div>
       </div>
     </div>
