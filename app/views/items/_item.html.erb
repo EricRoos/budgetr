@@ -11,7 +11,7 @@
         <div class="dropdown-menu" aria-labelledby="itemActionsdropdownMenuButton<%=item.id%>">
           <% if !item.purchased %>
             <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-            <%= form_with(model: item, url:url, remote: true) do |form| %>
+            <%= form_with(model: item, url:url, local: false) do |form| %>
               <%= form.hidden_field :purchased, value: true %>
               <%= form.submit value: 'Purchase', class: 'dropdown-item' %>
             <% end %>
@@ -26,7 +26,7 @@
     <div class='d-none d-md-block'>
       <% if !item.purchased %>
         <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-        <%= form_with(model: item, url:url, html: { style: 'display: inline' }) do |form| %>
+        <%= form_with(model: item, url:url, local: false, html: { style: 'display: inline' }) do |form| %>
           <%= form.hidden_field :purchased, value: true %>
           <%= form.submit value: 'Purchase', class: 'btn btn-sm btn-outline-success' %>
         <% end %>
@@ -37,8 +37,8 @@
       <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true,remote: true,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
     </div>
   </td>
-  <div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
-    <%= render partial: 'items/modal_form', locals: { item: item } %>
-  </div>
 </tr>
+<div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
+  <%= render partial: 'items/modal_form', locals: { item: item } %>
+</div>
 <%= turbo_stream_from item %>

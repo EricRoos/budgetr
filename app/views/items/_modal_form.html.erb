@@ -8,7 +8,7 @@
     </div>
     <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
     <div class="modal-body">
-      <%= form_with(model: item, url:url,id: "itemForm#{item.id}") do |form| %>
+      <%= form_with(model: item, url:url,id: "itemForm#{item.id}", local: false) do |form| %>
         <% id_prefix = "item_#{form.object.id}_" %>
         <div class="field">
           <%= form.label :name, for: "#{id_prefix}name" %>

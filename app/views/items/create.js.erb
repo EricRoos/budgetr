@@ -1,6 +1,4 @@
-$("#newItemModal<%=@item.item_group.id%>").on('hidden.bs.modal', function() {
-  $('.toast .toast-body').html("Successfully added")
-  $('.toast').toast('show');
-});
-$("[type='submit'][name='commit'][value='<%=params[:commit]%>']").closest("form")[0].reset();
+//$("[type='submit'][name='commit'][value='<%=params[:commit]%>']").closest("form")[0].reset();
 $("#newItemModal<%=@item.item_group.id%>").modal('hide');
+$('.toast .toast-body').html("Successfully added")
+$('.toast').toast('show');
