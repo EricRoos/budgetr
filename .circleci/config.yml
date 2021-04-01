@@ -27,6 +27,7 @@ jobs:
           command: make circleci_deploy_pipeline
   test:
     environment:
+      JS_DRIVER: apparition
       RAILS_ENV: test
       DATABASE_URL: postgres://postgres:mysecretpassword@localhost/Budgetr_test
     docker:
