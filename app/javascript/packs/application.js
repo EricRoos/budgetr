@@ -25,7 +25,8 @@ require("../stylesheets/main.scss")
 require("trix")
 require("@rails/actiontext")
 
-require("@rails/ujs").start()
+window.ujs = require("@rails/ujs");
+window.ujs.start()
 
 $('.toast').toast({delay: 1500})
 
