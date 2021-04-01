@@ -11,49 +11,7 @@
   <tbody>
     <% items.each do |item| %>
       <% cache item do %>
-        <tr scope="row" class="<%= "bg-warning" if item.note.empty? && (item.purchase_price || 0) > 0 && !item.purchased %> <%= item.purchased? ? "table-dark" : "" %>" style="<%= item.purchased? ? "text-decoration: line-through" : "" %>">
-          <td><%= item.name %> x <%= item.quantity %></td>
-          <td><%= (item.purchase_price || Money.new(0))&.format %></td>
-          <td><%= item.total_price&.format %></td>
-          <td>
-            <div class='d-sm-block d-md-none'>
-              <div class="dropdown">
-                <button type="button" class="btn btn-secondary dropdown-toggle itemActionsdropdownMenuButton<%=item.id%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Actions
-                </button>
-                <div class="dropdown-menu" aria-labelledby="itemActionsdropdownMenuButton<%=item.id%>">
-                  <% if !item.purchased %>
-                    <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-                    <%= form_with(model: item, url:url) do |form| %>
-                      <%= form.hidden_field :purchased, value: true %>
-                      <%= form.submit value: 'Purchase', class: 'dropdown-item' %>
-                    <% end %>
-                  <% end %>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
-                    Edit
-                  </a>
-                  <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
-                </div>
-              </div>
-            </div>
-            <div class='d-none d-md-block'>
-              <% if !item.purchased %>
-                <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-                <%= form_with(model: item, url:url, html: { style: 'display: inline' }) do |form| %>
-                  <%= form.hidden_field :purchased, value: true %>
-                  <%= form.submit value: 'Purchase', class: 'btn btn-sm btn-outline-success' %>
-                <% end %>
-              <% end %>
-              <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
-                Edit
-              </a>
-              <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
-            </div>
-            <div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
-              <%= render partial: 'items/modal_form', locals: { item: item } %>
-            </div>
-          </td>
-        </tr>
+        <%= render item %>
       <% end %>
     <% end %>
   </tbody>
