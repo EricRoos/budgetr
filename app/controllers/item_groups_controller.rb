@@ -28,7 +28,15 @@ class ItemGroupsController < ApplicationController
         format.html { redirect_to @project, notice: 'Item group was successfully created.' }
         format.json { render :show, status: :created, location: @item_group }
       else
-        format.html { render :new }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            :new_item_group,
+            partial: 'item_groups/modal_form',
+            locals: {
+              item_group: @item_group
+            }
+          )
+        end
         format.json { render json: @item_group.errors, status: :unprocessable_entity }
       end
     end
@@ -39,12 +47,18 @@ class ItemGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @item_group.update(item_group_params)
-        format.html do
-          redirect_to project_path(@project, shownItemGroup: @item_group.id), notice: 'Item group was successfully updated.'
-        end
-        format.json { render :show, status: :ok, location: @item_group }
+        format.html { redirect_to [@project, @item_group], notice: 'Item group was successfully created.' }
+        format.json { render :show, status: :created, location: @item_group }
       else
-        format.html { render :edit }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            :new_item_group,
+            partial: 'item_groups/modal_form',
+            locals: {
+              item_group: @item_group
+            }
+          )
+        end
         format.json { render json: @item_group.errors, status: :unprocessable_entity }
       end
     end

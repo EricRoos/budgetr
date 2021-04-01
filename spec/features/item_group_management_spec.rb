@@ -25,7 +25,7 @@ RSpec.feature 'Item Groupmanagement', type: :feature do
     click_button 'Add Room'
     fill_in 'Name', with: 'My Room'
     fill_in 'Budget', with: 1000
-    click_button 'Create Room'
+    click_button 'Create Item group'
     sleep 2
     expect(page).to have_content('Item group was successfully created.')
   end

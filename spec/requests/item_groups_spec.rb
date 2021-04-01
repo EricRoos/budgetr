@@ -91,7 +91,7 @@ RSpec.describe '/item_groups', type: :request do
     context 'with invalid parameters' do
       it 'does not create a new ItemGroup' do
         expect do
-          post project_item_groups_url(project), params: { item_group: invalid_attributes }
+          post project_item_groups_url(project), params: { format: 'turbo_stream', item_group: invalid_attributes }
         end.to change(ItemGroup, :count).by(0)
       end
     end
@@ -136,7 +136,7 @@ RSpec.describe '/item_groups', type: :request do
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         item_group = ItemGroup.create! valid_attributes
-        patch project_item_group_url(project, item_group), params: { item_group: invalid_attributes }
+        patch project_item_group_url(project, item_group), params: { format: 'turbo_stream',  item_group: invalid_attributes }
         expect(response).to be_successful
       end
     end

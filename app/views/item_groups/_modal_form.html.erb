@@ -1,20 +1,33 @@
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="itemGroupModalLabel<%= item_group.id %>">Item Group</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<%= turbo_frame_tag :new_item_group, target: '_top' do %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="itemGroupModalLabel<%= item_group.id %>">Item Group</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <%= form_with(model: [item_group.project,item_group ], local: true) do |form| %>
+            <% project = item_group.project %>
+            <% if item_group.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(item_group.errors.count, "error") %> prohibited this item_group from being saved:</h2>
+
+                <ul>
+                  <% item_group.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <%= render partial: 'item_groups/fields', locals: { form: form, budget_remaining: (project.budget - project.allocated_budget)  } %>
+            <%= form.submit class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
-      <div class="modal-body">
-        <%= form_with(model: [item_group.project,item_group ], local: true) do |form| %>
-          <% project = item_group.project %>
-          <%= render partial: 'item_groups/fields', locals: { form: form, budget_remaining: (project.budget - project.allocated_budget)  } %>
-          <%= form.submit value: 'Create Room', class: 'btn btn-primary' %>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
   </div>
-</div>
+<% end %>
