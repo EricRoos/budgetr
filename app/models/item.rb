@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Item < ApplicationRecord
+  broadcasts
   has_paper_trail
   belongs_to :item_group, touch: true, inverse_of: :items
   has_one :project, through: :item_group

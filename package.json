@@ -2,6 +2,7 @@
   "name": "Budgetr",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.0.3-3",
     "@rails/activestorage": "^6.0.0",
@@ -10,8 +11,8 @@
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "stimulus": "^2.0.0",
     "trix": "^1.2.0",
-    "turbolinks": "^5.2.0",
     "webpack": "^4.0.0"
   },
   "version": "0.1.0",

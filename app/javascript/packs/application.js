@@ -5,7 +5,7 @@
 
 window.jQuery = $;
 window.$ = $;
-require("turbolinks").start()
+import {Turbo, cable} from "@hotwired/turbo-rails"
 require("@rails/activestorage").start()
 require("channels")
 
@@ -28,3 +28,5 @@ require("@rails/actiontext")
 require("@rails/ujs").start()
 
 $('.toast').toast({delay: 1500})
+
+import "controllers"

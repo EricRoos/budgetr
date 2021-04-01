@@ -11,6 +11,7 @@
   <tbody>
     <% items.each do |item| %>
       <% cache item do %>
+        <%= turbo_stream_from item %>
         <%= render item %>
       <% end %>
     <% end %>
