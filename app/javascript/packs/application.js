@@ -29,5 +29,11 @@ window.ujs = require("@rails/ujs");
 window.ujs.start()
 
 $('.toast').toast({delay: 1500})
+$(document).ready(function(){
+  $(".modal").on('shown.bs.modal', function () {
+    $(this).find("input:visible").first().focus();
+  });
+});
+
 
 import "controllers"
