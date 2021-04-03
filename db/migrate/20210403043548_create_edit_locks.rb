@@ -3,6 +3,7 @@ class CreateEditLocks < ActiveRecord::Migration[6.0]
     create_table :edit_locks do |t|
       t.references :lockable, null: false, polymorphic: true
       t.boolean :locked
+      t.references :user
 
       t.timestamps
     end

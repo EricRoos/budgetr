@@ -9,13 +9,13 @@ module EditLockable
     edit_lock.present?
   end
 
-  def lock_for_editing
+  def lock_for_editing(user)
     return false if locked_for_edit?
-    edit_lock.create
+    EditLock.create!(lockable: self, locked_by: user)
   end
 
-  def unlock_for_edits
-    return false unless locked_for_edit?
-    edit_lock.destroy
+  def locked_by
+    return nil unless locked_for_edit?
+    edit_lock.locked_by
   end
 end

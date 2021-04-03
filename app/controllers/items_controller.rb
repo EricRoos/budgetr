@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @item.lock_for_editing(current_user)
     respond_to do |format|
       format.html
     end

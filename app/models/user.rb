@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :user_projects, dependent: :destroy
   has_many :projects, through: :user_projects
 
+  has_many :edit_locks, foreign_key: :user_id
+
   def add_project(project)
     UserProject.transaction do
       project.save unless project.persisted?

@@ -8,16 +8,21 @@
     </div>
     <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
     <div class="modal-body">
+      <% if !editable?(item, current_user) %>
+        <div class="alert alert-warning" role="alert">
+          Item is currently being edited by: <%= item.locked_by.email %>
+        </div>
+      <% end %>
       <%= form_with(disabled: true, model: item, url:url,id: "itemForm#{item.id}") do |form| %>
         <% id_prefix = "item_#{form.object.id}_" %>
         <div class="field">
           <%= form.label :name, for: "#{id_prefix}name" %>
-          <%= form.text_field :name, autofocus: true, id: "#{id_prefix}name", disabled: item.locked_for_edit? %>
+          <%= form.text_field :name, autofocus: true, id: "#{id_prefix}name", disabled: !editable?(item, current_user) %>
         </div>
 
         <div class="field">
           <%= form.label :quantity, for: "#{id_prefix}qty" %>
-          <%= form.number_field :quantity, id: "#{id_prefix}qty", disabled: item.locked_for_edit? %>
+          <%= form.number_field :quantity, id: "#{id_prefix}qty", disabled: !editable?(item,current_user) %>
 
         </div>
 
@@ -27,26 +32,26 @@
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
             </div>
-            <%= form.number_field :purchase_price,  step: "0.01",id: "#{id_prefix}price", disabled: item.locked_for_edit? %>
+            <%= form.number_field :purchase_price,  step: "0.01",id: "#{id_prefix}price", disabled: !editable?(item,current_user) %>
           </div>
         </div>
 
         <% if form.object.persisted? %>
           <div class="form-check">
-            <%= form.check_box :purchased, class: 'form-check-input', id: "#{id_prefix}purchased", disabled: item.locked_for_edit? %>
+            <%= form.check_box :purchased, class: 'form-check-input', id: "#{id_prefix}purchased", disabled: !editable?(item,current_user) %>
             <%= form.label :purchased, class: 'form-check-label' %>
           </div>
         <% end %>
 
         <div class="field">
           <%= form.label :note %>
-          <% if item.locked_for_edit? %>
-            <div><%= item.note %></div>
-          <% else %>
+          <% if editable?(item,current_user) %>
             <%= form.rich_text_area :note, id: "#{id_prefix}note" %>
+          <% else %>
+            <div><%= item.note %></div>
           <% end %>
         </div>
-        <%= form.submit class: 'btn btn-primary', disabled: item.locked_for_edit? %>
+        <%= form.submit class: 'btn btn-primary', disabled: !editable?(item,current_user) %>
       <% end %>
     </div>
     <div class="modal-footer">

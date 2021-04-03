@@ -35,7 +35,7 @@ $(document).ready(function(){
   });
   $(document).on("turbo:before-fetch-response", (ev) => {
     if($(".modal:visible").length){
-      $(".modal").modal("hide")
+      //$(".modal").modal("hide")
     }
   });
 });

@@ -59,9 +59,11 @@ ActiveRecord::Schema.define(version: 2021_04_03_043548) do
     t.string "lockable_type", null: false
     t.bigint "lockable_id", null: false
     t.boolean "locked"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lockable_type", "lockable_id"], name: "index_edit_locks_on_lockable_type_and_lockable_id"
+    t.index ["user_id"], name: "index_edit_locks_on_user_id"
   end
 
   create_table "item_groups", force: :cascade do |t|

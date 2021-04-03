@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :check_for_restorable
+  before_action :clear_edit_locks
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -25,5 +26,10 @@ class ApplicationController < ActionController::Base
     @restorable ||= PaperTrail::Version.where(id: session[:restorable_id]).first
     session[:restorable_id] = nil
     @restorable
+  end
+
+  def clear_edit_locks
+    return nil unless current_user.present?
+    current_user.edit_locks.destroy_all
   end
 end
