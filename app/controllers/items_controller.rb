@@ -22,7 +22,11 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/1/edit
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.html
+    end
+  end
 
   # POST /items
   # POST /items.json
@@ -49,10 +53,15 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html do
-          redirect_to project_path(@project, notice: 'Item was successfully updated.')
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            @item,
+            partial: 'items/item',
+            locals: {
+              item: @item
+            }
+          )
         end
-        format.js
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }

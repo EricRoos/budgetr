@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
+  it_behaves_like 'edit_lockable'
+
   describe '#total_price' do
     subject { item.total_price }
 

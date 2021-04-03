@@ -16,9 +16,7 @@
               <%= form.submit value: 'Purchase', class: 'dropdown-item' %>
             <% end %>
           <% end %>
-          <a class="dropdown-item" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
-            Edit
-          </a>
+          <%= link_to 'Edit', project_item_group_item_path(item.item_group.project, item.item_group, item) %>
           <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
         </div>
       </div>
@@ -31,14 +29,19 @@
           <%= form.submit value: 'Purchase', class: 'btn btn-sm btn-outline-success' %>
         <% end %>
       <% end %>
-      <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#itemEditModal<%= item.id %>">
+      <a href='#'
+         class='btn btn-sm btn-outline-secondary'
+         data-toggle="modal"
+         data-target="#editItemModal"
+         data-controller='dynamic-turbo-frame'
+         data-action='dynamic-turbo-frame#load'
+         data-dynamic-turbo-frame-frame-id-value='edit_item'
+         data-dynamic-turbo-frame-src-value="<%= edit_project_item_group_item_path(item.item_group.project, item.item_group, item) %>"
+       >
         Edit
       </a>
       <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true,remote: true,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
     </div>
   </td>
 </tr>
-<div class="modal fade" id="itemEditModal<%=item.id%>" tabindex="-1" role="dialog" aria-labelledby="itemEditModalLabel<%=item.id%>" aria-hidden="true">
-  <%= render partial: 'items/modal_form', locals: { item: item } %>
-</div>
 <%= turbo_stream_from item %>

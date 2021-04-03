@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_041318) do
+ActiveRecord::Schema.define(version: 2021_04_03_043548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 2020_11_08_041318) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_contributors_on_project_id"
     t.index ["user_id"], name: "index_contributors_on_user_id"
+  end
+
+  create_table "edit_locks", force: :cascade do |t|
+    t.string "lockable_type", null: false
+    t.bigint "lockable_id", null: false
+    t.boolean "locked"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lockable_type", "lockable_id"], name: "index_edit_locks_on_lockable_type_and_lockable_id"
   end
 
   create_table "item_groups", force: :cascade do |t|
@@ -113,7 +122,8 @@ ActiveRecord::Schema.define(version: 2020_11_08_041318) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type", null: false
+    t.string "item_type"
+    t.string "{:null=>false}"
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"

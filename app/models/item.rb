@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Item < ApplicationRecord
+  include EditLockable
+
   broadcasts
   after_create_commit {broadcast_prepend_to "items"}
   has_paper_trail

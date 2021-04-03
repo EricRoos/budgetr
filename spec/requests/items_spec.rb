@@ -116,7 +116,7 @@ RSpec.describe '/items', type: :request do
 
       it 'updates the requested item' do
         item = Item.create! valid_attributes
-        patch project_item_group_item_url(project, item_group, item), params: { item: new_attributes }
+        patch project_item_group_item_url(project, item_group, item, format: :turbo_stream), params: { item: new_attributes }
         item.reload
         expect(item.name).to eq('updated')
       end

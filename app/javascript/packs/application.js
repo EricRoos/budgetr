@@ -33,6 +33,11 @@ $(document).ready(function(){
   $(".modal").on('shown.bs.modal', function () {
     $(this).find("input:visible").first().focus();
   });
+  $(document).on("turbo:before-fetch-response", (ev) => {
+    if($(".modal:visible").length){
+      $(".modal").modal("hide")
+    }
+  });
 });
 
 
