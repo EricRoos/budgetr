@@ -40,4 +40,21 @@ RSpec.feature 'Item Management', type: :feature do
     end
     expect(page).to have_content('No items')
   end
+
+  scenario 'editing an item', js: true do
+    Item.create(item_group: item_group, purchase_price: 1.99, quantity: 1, name: 'Test Item')
+    visit project_item_group_path(project, item_group)
+    click_link 'Edit'
+    expect(page).to have_content('Update Item')
+  end
+
+  scenario 'editing a locked item', js: true do
+    item = Item.create(item_group: item_group, purchase_price: 1.99, quantity: 1, name: 'Test Item')
+    email = 'foo2@test.com'
+    password = 'test123456'
+    item.lock_for_editing(User.create(email: email, password: password))
+    visit project_item_group_path(project, item_group)
+    click_link 'Edit'
+    expect(page).to have_content('Item is currently being edited by: foo2@test.com')
+  end
 end
