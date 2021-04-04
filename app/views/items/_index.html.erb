@@ -14,6 +14,7 @@
       <% cache item do %>
         <%= render item %>
       <% end %>
+      <%= turbo_stream_from item %>
     <% end %>
   </tbody>
 </table>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
+  config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_name_prefix = "Budgetr_development"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -30,6 +32,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.action_cable.url = 'http://0.0.0.0:28080/cable'
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 

@@ -29,6 +29,7 @@ gem 'devise'
 gem 'pundit'
 gem 'rexml'
 gem 'hotwire-rails'
+gem 'sidekiq'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
