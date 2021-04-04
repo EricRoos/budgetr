@@ -45,8 +45,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain.
-  config.action_cable.mount_path = '/cable'
-  #config.action_cable.url = 'wss://budgetr.redroosterdevelopment.com/cable'
+  config.action_cable.url = 'https://budgetr.redroosterdevelopment.com:28080/cable'
   config.action_cable.allowed_request_origins = [ 'https://budgetr.redroosterdevelopment.com' ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
