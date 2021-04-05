@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || root_path)
   end
 
+  def clear_locks
+    authorize current_user
+    head :no_content
+  end
   private
 
   def check_for_restorable

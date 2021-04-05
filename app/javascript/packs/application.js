@@ -25,7 +25,8 @@ require("../stylesheets/main.scss")
 require("trix")
 require("@rails/actiontext")
 
-window.ujs = require("@rails/ujs");
+const ujs = require("@rails/ujs");
+window.ujs = ujs;
 window.ujs.start()
 
 window.Turbo = Turbo;
@@ -46,8 +47,11 @@ $(document).ready(function(){
       modalDialog.appendChild(loadingContent);
     }
   });
-
+  $("#editItemModal").on('hide.bs.modal', function () {
+    ujs.ajax({ type: 'POST', url: '/clear_locks' })
+  });
 });
+
 
 
 import "controllers"
