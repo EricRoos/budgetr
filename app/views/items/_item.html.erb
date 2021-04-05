@@ -3,9 +3,9 @@
   <td><%= (item.purchase_price || Money.new(0))&.format %></td>
   <td><%= item.total_price&.format %></td>
   <td>
-    <div class='d-sm-block d-md-none'>
+    <div class='d-sm-block d-md-block d-lg-none'>
       <div class="dropdown">
-        <button type="button" class="btn btn-secondary dropdown-toggle itemActionsdropdownMenuButton<%=item.id%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle itemActionsdropdownMenuButton<%=item.id%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Actions
         </button>
         <div class="dropdown-menu" aria-labelledby="itemActionsdropdownMenuButton<%=item.id%>">
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class='d-none d-md-block'>
+    <div class='d-none d-lg-block'>
       <% if !item.purchased %>
         <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
         <%= form_with(model: item, url:url, html: { style: 'display: inline' }) do |form| %>
