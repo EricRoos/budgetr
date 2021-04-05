@@ -25,7 +25,11 @@
              data-dynamic-turbo-frame-frame-id-value='edit_item'
              data-dynamic-turbo-frame-src-value="<%= edit_project_item_group_item_path(item.item_group.project, item.item_group, item) %>"
            >
-            Edit
+           <% if item.locked_for_edit? %>
+             Locked
+           <% else %>
+             Edit
+           <% end %>
           </a>
           <%= button_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { disable_with: 'Removing...', confirm: 'Are you sure?' }, class: 'dropdown-item' %>
         </div>
@@ -48,7 +52,11 @@
          data-dynamic-turbo-frame-frame-id-value='edit_item'
          data-dynamic-turbo-frame-src-value="<%= edit_project_item_group_item_path(item.item_group.project, item.item_group, item) %>"
        >
-        Edit
+         <% if item.locked_for_edit? %>
+           Locked
+         <% else %>
+           Edit
+         <% end %>
       </a>
       <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { disable_with: 'Removing...', confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
     </div>

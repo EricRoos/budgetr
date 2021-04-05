@@ -54,7 +54,7 @@ RSpec.feature 'Item Management', type: :feature do
     password = 'test123456'
     item.lock_for_editing(User.create(email: email, password: password))
     visit project_item_group_path(project, item_group)
-    click_link 'Edit'
+    click_link 'Locked'
     expect(page).to have_content('Item is currently being edited by: foo2@test.com')
   end
 end
