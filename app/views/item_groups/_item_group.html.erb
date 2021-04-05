@@ -51,17 +51,23 @@
 
     <li class="list-group-item d-flex justify-content-between lh-condensed">
       <div class='w-100'>
-        <button class='btn btn-sm btn-block btn-primary' href='#' data-toggle="modal" data-target="#newItemModal<%=item_group.id%>">
-          Add Item
-        </button>
+        <button
+            href='#'
+             class='btn btn-sm btn-block btn-primary'
+             data-toggle="modal"
+             data-target="#newItemModal"
+             data-controller='dynamic-turbo-frame'
+             data-action='dynamic-turbo-frame#load'
+             data-dynamic-turbo-frame-frame-id-value='new_item'
+             data-dynamic-turbo-frame-src-value="<%= new_project_item_group_item_path(item_group.project, item_group) %>"
+           >
+            Add Item
+          </button>
         <button type="button" class="btn btn-sm btn-block btn-outline-secondary" data-toggle="modal" data-target="#itemGroupModal<%= item_group.id %>">
           Edit Room
         </button>
         <hr/>
         <%= link_to "Delete Room", [item_group.project, item_group], method: :delete, class: 'btn btn-block btn-sm btn-outline-danger', data: { confirm: 'Are you sure?' } %> </td>
-      </div>
-      <div class="modal fade" id="itemGroupModal<%=item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemGroupModalLabel<%=item_group.id%>" aria-hidden="true">
-        <%= render partial: 'item_groups/modal_form', locals: { item_group: item_group } %>
       </div>
     </li>
   </ul>

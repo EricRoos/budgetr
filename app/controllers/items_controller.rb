@@ -19,6 +19,9 @@ class ItemsController < ApplicationController
   def new
     @item = @item_group.items.build
     authorize @item
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /items/1/edit
@@ -37,10 +40,18 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html do
-          redirect_to project_item_group_path(@project, @item.item_group), notice: 'Item was successfully created.'
+        format.turbo_stream do
+          flash.now[:notice] = 'Item created'
+          render turbo_stream: [
+            turbo_stream.update(
+              :new_item,
+              partial: 'items/modal_form',
+              locals: {
+                item: @item_group.items.build
+              }
+            )
+          ]
         end
-        format.js
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -54,14 +65,24 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
+        flash.now[:notice] = 'Item updated'
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            @item,
-            partial: 'items/item',
-            locals: {
-              item: @item
-            }
-          )
+          render turbo_stream: [
+            turbo_stream.replace(
+              @item,
+              partial: 'items/item',
+              locals: {
+                item: @item
+              }
+            ),
+            turbo_stream.update(
+              :edit_item,
+              partial: 'items/modal_form',
+              locals: {
+                item: @item
+              }
+            )
+          ]
         end
         format.json { render :show, status: :ok, location: @item }
       else

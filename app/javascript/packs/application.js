@@ -28,16 +28,25 @@ require("@rails/actiontext")
 window.ujs = require("@rails/ujs");
 window.ujs.start()
 
+window.Turbo = Turbo;
+
 $('.toast').toast({delay: 1500})
 $(document).ready(function(){
   $(".modal").on('shown.bs.modal', function () {
     $(this).find("input:visible").first().focus();
   });
-  $(document).on("turbo:before-fetch-response", (ev) => {
-    if($(".modal:visible").length){
-      //$(".modal").modal("hide")
+
+  $(".modal").on('hide.bs.modal', function () {
+    const template = $(this).find("template[data-loader]")[0]
+    if(template){
+      const loadingContent = template.content.cloneNode(true);
+      console.log(loadingContent);
+      const modalDialog = $(this).find(".modal-dialog")[0];
+      modalDialog.innerHTML = '';
+      modalDialog.appendChild(loadingContent);
     }
   });
+
 });
 
 

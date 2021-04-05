@@ -73,7 +73,7 @@ RSpec.describe '/items', type: :request do
     context 'with valid parameters' do
       it 'creates a new Item' do
         expect do
-          post project_item_group_items_url(project, item_group), params: { item: valid_attributes }
+          post project_item_group_items_url(project, item_group), params: { item: valid_attributes, format: :turbo_stream }
         end.to change(Item, :count).by(1)
       end
       context 'when logged in as a contributing user' do
@@ -81,7 +81,7 @@ RSpec.describe '/items', type: :request do
 
         it 'creates a new Item' do
           expect do
-            post project_item_group_items_url(project, item_group), params: { item: valid_attributes }
+            post project_item_group_items_url(project, item_group), params: { item: valid_attributes, format: :turbo_stream }
           end.to change(Item, :count).by(1)
         end
       end

@@ -11,7 +11,7 @@
         <div class="dropdown-menu" aria-labelledby="itemActionsdropdownMenuButton<%=item.id%>">
           <% if !item.purchased %>
             <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
-            <%= form_with(model: item, url:url, local: false) do |form| %>
+            <%= form_with(model: item, url:url) do |form| %>
               <%= form.hidden_field :purchased, value: true %>
               <%= form.submit value: 'Purchase', class: 'dropdown-item' %>
             <% end %>
@@ -27,7 +27,7 @@
            >
             Edit
           </a>
-          <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %>
+          <%= button_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { disable_with: 'Removing...', confirm: 'Are you sure?' }, class: 'dropdown-item' %>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         <% url = item.persisted? ? project_item_group_item_path(item.item_group.project, item.item_group, item) : project_item_group_items_path(item.item_group.project, item.item_group) %>
         <%= form_with(model: item, url:url, html: { style: 'display: inline' }) do |form| %>
           <%= form.hidden_field :purchased, value: true %>
-          <%= form.submit value: 'Purchase', class: 'btn btn-sm btn-outline-success' %>
+          <%= form.submit value: 'Purchase', class: 'btn btn-sm btn-outline-success', data: { disable_with: 'Purchasing...'} %>
         <% end %>
       <% end %>
       <a href='#'
@@ -50,7 +50,7 @@
        >
         Edit
       </a>
-      <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], remote: true,remote: true,  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
+      <%= link_to 'Destroy', [item.item_group.project, item.item_group, item], method: :delete, data: { disable_with: 'Removing...', confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
     </div>
   </td>
 </tr>

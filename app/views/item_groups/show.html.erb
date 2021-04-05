@@ -13,9 +13,38 @@
     <div class="col-md-8">
       <% groups = @item_group.items.order("purchased asc nulls last, created_at desc").with_rich_text_note %>
       <%= render partial: 'items/index', locals: { items: groups } %>
-      <div class="modal fade" id="newItemModal<%=@item_group.id%>" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
-        <%= render partial: 'items/modal_form', locals: { item: Item.new(item_group: @item_group) } %>
-      </div>
     </div>
+  </div>
+</div>
+<div class="modal fade" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel" aria-hidden="true">
+  <template data-loader>
+    <%= turbo_frame_tag :new_item, target:'_top' do %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Loading...
+        </div>
+      </div>
+    <% end %>
+  </template>
+  <div class="modal-dialog" role="document">
+    <%= turbo_frame_tag :new_item, target:'_top' do %>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Loading...
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

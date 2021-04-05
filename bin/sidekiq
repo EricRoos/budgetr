@@ -1,0 +1,3 @@
+#!/bin/bash
+bundle exec sidekiq -q critical -q Budgetr_development_default
+

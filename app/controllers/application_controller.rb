@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :check_for_restorable
   before_action :clear_edit_locks
+  after_action :clear_flash_messages, if: -> { turbo_frame_request? }
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -31,5 +32,9 @@ class ApplicationController < ActionController::Base
   def clear_edit_locks
     return nil unless current_user.present?
     current_user.edit_locks.destroy_all
+  end
+
+  def clear_flash_messages
+    flash.discard
   end
 end
